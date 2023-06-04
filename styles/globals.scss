@@ -1,0 +1,20 @@
+
+@import 'variaveis.scss';//importação das variáveis
+
+*{
+  font-family: 'biennale regular';
+  font-size: 14px;
+}
+
+.avatar{
+  border-radius: 50%;
+  object-fit: cover; //ajusta a imagemn de acordo com o tamanho necessario
+}
+
+.oculto{
+  display:none;
+}
+
+
+@import '../public/fonts/fonts.scss';//importação da fonte por url 
+@import '../componentes/botao/button.scss';
