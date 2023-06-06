@@ -1,7 +1,9 @@
+import Head from 'next/head'
+import Image from 'next/image'
 import Botao from '@/componentes/botao'
 import Avatar from '@/componentes/avatar'
 import { UploadImagem } from '@/componentes/uploadImagem'
-import { useRef, useState } from 'react'
+import { useState, useRef } from 'react'
 
 export default function Home() {
   const [imagem, setImagem] = useState(null)
@@ -11,22 +13,19 @@ export default function Home() {
     <>
       <h1> Olá Mundo!</h1>
       <button onClick={() => referenciaInput?.current?.click()}>
-        abrir seletor arquivos
+        Abrir Seletor Arquivos
       </button>
-      /
       <UploadImagem
         setImagem={setImagem}
         imagemPreview={imagem?.preview}
-        aoSetarArefeRencia={ref => (referenciaInput.current = ref)}
+        aoSetarAReferencia={ref => (referenciaInput.current = ref)}
       />
       <div style={{ width: 200 }}>
         <Avatar />
         <Botao
           texto={'Login'}
           cor="invertido"
-          desabilitado={false}
-          manipularClique
-          {...() => console.log('Botao Clicado')}
+          manipularClique={() => console.log('Botao Clicado')}
         />
       </div>
     </>

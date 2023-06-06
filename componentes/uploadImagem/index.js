@@ -1,30 +1,27 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 
 export function UploadImagem({
   className = '',
   setImagem,
   imagemPreview,
   imagemPreviewClassName = '',
-  aoSetarAreferencia
+  aoSetarAReferencia
 }) {
   const referenciaInput = useRef(null)
 
-  useEffect(() => {
-    //executa o escopo do useEfecct toda a vez que alterar a Refencia do Input
-    if (!aoSetarAreferencia) {
-      return //esse return significa não fazer nada
+  useEffect(()=>{
+    if(!aoSetarAReferencia){
+      return;
     }
+    aoSetarAReferencia(referenciaInput?.current);
 
-    aoSetarAreferencia(referenciaInput?.current)
-  }, [referenciaInput?.current])
+  },[referenciaInput.current]);
 
   const abrirSeletorArquivos = () => {
     referenciaInput?.current?.click()
   }
 
   const aoAlterarImagem = () => {
-    //altera aimagem do input
-
     if (!referenciaInput?.current?.files?.length) {
       //verifica se existe algum arquivo
       return
@@ -32,9 +29,8 @@ export function UploadImagem({
 
     const arquivo = referenciaInput?.current?.files[0] //Captura a primeira imagem do array
     const fileReader = new FileReader() //lê e mostra o preview da imagem que pode ser postada
-    fileReader.readAsDataURL(arquivo) //lê o arquivo e devolve a URl desse aqruivo pra ser usado em um componente de uploadImagem
+    fileReader.readAsDataURL(arquivo) //lê o arquivo e devolve a URl desse arquivo pra ser usado em um componente de uploadImagem
     fileReader.onloadend = () => {
-      //
       setImagem({
         preview: fileReader.result,
         arquivo
