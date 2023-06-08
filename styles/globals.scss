@@ -6,6 +6,13 @@
   font-size: 14px;
 }
 
+html, body, #_next{
+  height: 100%;
+  margin: 0;
+}
+
+
+
 .avatar{
   border-radius: 50%;
   object-fit: cover; //ajusta a imagemn de acordo com o tamanho necessario
@@ -15,7 +22,27 @@
   display:none;
 }
 
+input{
+  &::placeholder{
+    /*Chrome, Opera, Safari e Firefox*/
+    color:$cinza2;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder{
+    /*ie 10-11*/
+    color:$cinza2;
+  }
+
+  &::-ms-input-placeholder{
+    color:$cinza2
+  }
+
+}
+
 
 @import '../public/fonts/fonts.scss';//importação da fonte por url 
 @import '../componentes/botao/button.scss';
+@import './paginaPublica.scss';
+@import '../componentes/inputPublico/inputPublico.scss';
 
