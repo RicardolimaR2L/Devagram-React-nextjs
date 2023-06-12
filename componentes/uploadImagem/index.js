@@ -9,13 +9,12 @@ export function UploadImagem({
 }) {
   const referenciaInput = useRef(null)
 
-  useEffect(()=>{
-    if(!aoSetarAReferencia){
-      return;
+  useEffect(() => {
+    if (!aoSetarAReferencia) {
+      return
     }
-    aoSetarAReferencia(referenciaInput?.current);
-
-  },[referenciaInput.current]);
+    aoSetarAReferencia(referenciaInput?.current)
+  }, [referenciaInput.current])
 
   const abrirSeletorArquivos = () => {
     referenciaInput?.current?.click()
@@ -55,7 +54,7 @@ export function UploadImagem({
       <input
         type="file"
         className="oculto"
-        accept="image/*"
+        accept="Image/*"
         ref={referenciaInput}
         onChange={aoAlterarImagem}
       />

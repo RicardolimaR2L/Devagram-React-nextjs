@@ -12,12 +12,12 @@
       position: relative;
       height: 9em;
       width: 100%;
-      margin-top: 110px;
+      margin-top: 100px;
   }
 
   .conteudoPaginaPublica {
       width: 100%;
-      margin-top: 40px;
+      margin-top: 20px;
   }
   
   .btn {
@@ -27,7 +27,8 @@
 
   .rodapePaginaPublica {
       text-align: center;
-      margin-top: 24px;
+      margin-top: 10px;
+      
 
       p {
           color: $cinza3;
@@ -44,19 +45,22 @@
       flex-direction: row;
       padding: 0 140px;
       font-size: 18px;
-html, body{
-    height:80%;
-    margin-top: 55px;
-}    
+    
+      html, body{
+        height:80%;
+        margin-top: 55px;
+            }    
       
       .logoContainer {
-          height: 15em;
+          height: 22em;
           flex: 2;
-          margin-top: 150px;
+          margin-top: 200px;
+          width: 100%;
          
           .logo {
               width: 100%;
               max-width: 300px;
+              margin-left: 150px;
           }
       }
 
@@ -65,9 +69,11 @@ html, body{
           width: 100%;
           border: 1px solid $corPrimaria;
           border-radius: 26px;
-          padding: 50px;
-          margin-top: 150px;
+          padding:40px 60px ;
+          margin-top:150px;
+          
       }
+    
 
       .btn {
           padding: 18px;
