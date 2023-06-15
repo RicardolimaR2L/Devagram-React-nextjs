@@ -10,7 +10,7 @@ const validarEmail = email => {
 }
 
 const validarSenha = senha => {
-  return senha?.toString().length >= 6
+  return senha?.toString().length >= 3
 }
 
 const validarConfirmacaoSenha = (senha, confirmacao) => {

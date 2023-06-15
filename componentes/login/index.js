@@ -11,42 +11,40 @@ import UsuarioService from '@/services/UsuarioService'
 
 const usuarioService = new UsuarioService()
 
-export default function Login() {
+export default function Login({ aposAutenticacao }) {
   const [email, setEmail] = useState('')
   const [senha, setsenha] = useState('')
   const [estaSubmetendo, setEstaSubmetendo] = useState(false)
 
-  const validarFormulario = () =>{
-    return(
-      validarEmail(email)
-      && validarSenha || validarSenha && validarEmail(email)
-    );
+  const validarFormulario = () => {
+    return (
+      (validarEmail(email) && validarSenha) ||
+      (validarSenha && validarEmail(email))
+    )
   }
 
-  const aoSubmeter = async(e) =>{
-    e.preventDefault();
-    if(!validarFormulario()){
-      return;
+  const aoSubmeter = async e => {
+    e.preventDefault()
+    if (!validarFormulario()) {
+      return
     }
-    setEstaSubmetendo(true);
-
-    setEstaSubmetendo(false);
+    setEstaSubmetendo(true)
 
     try {
-
       await usuarioService.login({
-        login:email,
+        login: email,
         senha
-      });
+      })
 
-      //TO DO: redirecionar o usuario para a Home 
-      
+      if (aposAutenticacao) {
+        aposAutenticacao()
+      }
+      console.log(aposAutenticacao)
     } catch (error) {
-      alert(
-        'Erro ao realizar o login ' + error?.response?.data?.erro
-      )
+      console.log(error)
+      alert('Erro ao realizar o login ' + error?.response?.data?.erro)
     }
-
+    setEstaSubmetendo(false)
   }
 
   return (
@@ -74,10 +72,11 @@ export default function Login() {
             mensagemValidacao="A senha precisa  pelo menos 6 caracteres"
             exibirMensagemValidacao={senha && !validarSenha(senha)}
           />
-          <Botao 
-          texto="Login" 
-          tipo="submit" 
-          desabilitado={!validarFormulario() || estaSubmetendo } />
+          <Botao
+            texto="Login"
+            tipo="submit"
+            desabilitado={!validarFormulario() || estaSubmetendo}
+          />
         </form>
         <div className="rodapePaginaPublica">
           <p>Não possui uma conta?</p>

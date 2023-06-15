@@ -1,0 +1,55 @@
+.cabecalhoPrincipal {
+  border-bottom: 0.5px solid $cinza1;
+
+  .conteudoCabecalhoPrincipal {
+    display: flex;
+    padding: 8px 16px;
+
+    .logocabecalhoPrincipal {
+      position: relative;
+      width: 140px;
+      height: 30px;
+    }
+
+    .barraPesquisa {
+      position: relative;
+      margin-left: 16px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+
+      .containerImagemLupa {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        margin-left: 8px;
+      }
+
+      input {
+        background-color: $corPrimaria4;
+        border: none;
+        outline: none;
+        font-size: 12px;
+        font-family: $fontLight;
+        padding: 8px 8px 8px 36px;
+        border-radius: 4px;
+
+        &:focus {
+          border: 1px solid $corPrimaria;
+          color: $corPrimaria;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    background-color: $branco;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+  }
+}

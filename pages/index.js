@@ -1,43 +1,30 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import Botao from '@/componentes/botao'
-// import Avatar from '@/componentes/avatar'
-// import { UploadImagem } from '@/componentes/uploadImagem'
-// import { useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
+import Home from '@/componentes/home';
+import Login from '@/componentes/login'
+import UsuarioService from '@/services/UsuarioService'
 
-// export default function Home() {
-//   const [imagem, setImagem] = useState(null)
-//   const referenciaInput = useRef(null)
+const usuarioService = new UsuarioService();
+export default function Index() {
+  const [estaAutenticado, setEstaAutenticado] = useState(null);
 
-//   return (
-//     <>
-//       <h1> Olá Mundo!</h1>
-//       <button onClick={() => referenciaInput?.current?.click()}>
-//         Abrir Seletor Arquivos
-//       </button>
-//       <UploadImagem
-//         setImagem={setImagem}
-//         imagemPreview={imagem?.preview}
-//         aoSetarAReferencia={ref => (referenciaInput.current = ref)}
-//       />
-//       <div style={{ width: 200 }}>
-//         <Avatar />
-//         <Botao
-//           texto={'Login'}
-//           cor="invertido"
-//           manipularClique={() => console.log('Botao Clicado')}
-//         />
-//       </div>
-//     </>
-//   )
-// }
+  useEffect(() => {
+    setEstaAutenticado(
+      usuarioService.estaAutenticado()
+    );
+  }, []);
 
-import Login from "@/componentes/login";
+  if( estaAutenticado === null){
+    return null
+    }
 
-export default function index(){
-  return(
+
+    if (estaAutenticado) {
+     return <Home />
+  } 
+
+  return (
     <>
-    <Login/>
+      <Login aposAutenticacao= {() => setEstaAutenticado(true)} />
     </>
   )
 }

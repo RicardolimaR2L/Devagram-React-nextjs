@@ -5,6 +5,7 @@ import Botao from '@/componentes/botao'
 import InputPublico from '@/componentes/inputPublico'
 import { UploadImagem } from '@/componentes/uploadImagem'
 import UsuarioService from '@/services/UsuarioService'
+import { useRouter } from 'next/router'
 
 import logo from '../../public/imagens/logo.svg'
 import usuarioAtivo from '../../public/imagens/usuarioAtivo.svg'
@@ -28,6 +29,7 @@ export default function cadastro() {
   const [senha, setSenha] = useState('')
   const [confirtmacaosenha, setConfirmacaosenha] = useState('')
   const [estaSubmetendo, setEstaSubmetendo] = useState(false)
+  const router = useRouter()
 
   const validarFormulario = () => {
     return (
@@ -57,8 +59,11 @@ export default function cadastro() {
       }
 
       await usuarioService.cadastro(corpoReqCadastro)
-      alert('Sucesso!')
-      //TO DO : autenticar o usuario diretamente apos o cadastro
+      await usuarioService.login({
+        login: email,
+        senha
+      })
+      router.push('/')
     } catch (erro) {
       alert('Erro ao cadastrar usuário' + erro?.response?.data?.erro)
     }
