@@ -1,4 +1,4 @@
-import avatarImg from '../../public/images/avatar.svg'
+import avatarImg from '../../public/imagens/avatar.svg'
 
 
 export default function Avatar({src}){

@@ -42,14 +42,80 @@
     }
   }
 
+  .resultadoPesquisaContainer {
+    position: absolute;
+    background-color: $branco;
+    width: 100%;
+    z-index: 9;
+
+    .resultadoPesquisa {
+      display: flex;
+      padding: 10px 16px;
+
+      &:hover{
+        background-color: $cinza;
+      }
+
+      .avatar{
+        width: 32px;
+        height: 32px;
+        margin-right: 8px;
+      }
+
+
+     .informacoesUsuario{
+      > * {
+        display: flex;
+        font-size: 12px;
+        color: $cinza4;
+      }
+     }
+
+    }
+  }
+
   @media screen and (min-width: $desktopBreakpoint) {
     background-color: $branco;
     border: none;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    .conteudoCabecalhoPrincipal {
+      max-width: 60%;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
 
+      .logocabecalhoPrincipal {
+        width: 180px;
+        height: 40px;
+      }
+
+      .barraPesquisa {
+        flex: 0.5;
+        margin: 0px 5px 0px 30px;
+
+        .input {
+          width: 100%;
+        }
+      }
+
+      .barraNavegacao {
+        ul {
+          margin-right: 100px;
+          li {
+            margin: 0px 0px 0px 16px;
+          }
+        }
+      }
+    }
+
+    .resultadoPesquisaContainer{
+      width: 20%;
+      margin:auto;
+      cursor: pointer;
+      right:4%;
+      left: 3%;
+      box-shadow: 0px 4px 5px $cinza2;
+    }
 
   }
 }

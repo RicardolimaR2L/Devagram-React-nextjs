@@ -1,0 +1,12 @@
+.rodape-mobile {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: $corPrimaria4;
+}
+
+@media screen and (min-width: $desktopBreakpoint) {
+  .rodape-mobile {
+    display: none;
+  }
+}
