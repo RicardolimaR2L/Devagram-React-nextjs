@@ -4,7 +4,6 @@ export default class UsuarioService extends HttpService {
   async login(credenciais) {
     const { data } = await this.post('/login', credenciais)
 
-
     localStorage.setItem('nome', data.nome)
     localStorage.setItem('email', data.email)
     localStorage.setItem('token', data.token)
@@ -21,6 +20,20 @@ export default class UsuarioService extends HttpService {
     return this.post('/cadastro', dados)
   }
   estaAutenticado() {
-    return localStorage.getItem('token') !== null;
+    return localStorage.getItem('token') !== null
   }
+  async pesquisar(termoDaPesquisa) {
+    return this.get('/pesquisa?filtro=' + termoDaPesquisa)
+  }
+
+  obterInformacoesDousuarioLogado(){
+    return{
+      id: localStorage.getItem('id'),
+      nome: localStorage.getItem('nome'),
+      email: localStorage.getItem('email'),
+      avatar: localStorage.getItem('avatar'),
+
+    }
+  }
+
 }
