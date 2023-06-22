@@ -22,6 +22,24 @@ export default function Feed({ usuarioLogado }) {
             mensagem: 'Muito legal'
           }
         ]
+      },
+      
+      {
+        id: '2',
+        usuario: {
+          id: '2',
+          nome: 'camila',
+          avatar: null
+        },
+        fotoDoPost: '',
+        descricao: '',
+        curtidas: [],
+        comentarios: [
+          {
+            nome: 'Fulano',
+            mensagem: 'Muito legal'
+          }
+        ]
       }
     ])
   }, [usuarioLogado])
