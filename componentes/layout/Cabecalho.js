@@ -4,50 +4,51 @@ import logoHorizontal from '@/public/imagens/logoHorizontal.svg'
 import lupa from '@/public/imagens/lupa.svg'
 import Navegacao from './Navegacao'
 import ResultadoPesquisa from './ResultadoPesquisa'
+import UsuarioService from '@/services/UsuarioService'
+import { Router, useRouter } from 'next/router'
 
+const usuarioService = new UsuarioService()
 
 export default function Cabecalho() {
   const [resultadoPesquisa, setResultadoPesquisa] = useState([])
-  const [termoPesquisado, setTermoPesquisado] = useState([])
+  const [termoPesquisado, setTermoPesquisado] = useState('')
+  const router = useRouter()
 
-  const aoPesquisar = e => {
+  const aoPesquisar = async e => {
     setTermoPesquisado(e.target.value)
     setResultadoPesquisa([])
     if (termoPesquisado.length < 3) {
       return
     }
 
-    setResultadoPesquisa([
-      {
-        avatar: 'https://noticiasdebasquete.com.br/wp-content/uploads/2023/04/NBA-1-e1682039031830.jpg' ,
-        nome:'RICARDO',
-        email:'ricardo@teste.com',
-        id:'300693'
-      },
-      {
-        avatar: '',
-        nome: 'CAMILA',
-        email: 'camila@teste.com',
-        id:'250694'
-      },
-      {
-        avatar: '',
-        nome: 'HELENA',
-        email: 'helena@teste.com',
-        id:'131213'
-      }
-    ])
+    try {
+      const { data } = await usuarioService.pesquisar(termoPesquisado)
+      setResultadoPesquisa(data)
+    } catch (error) {
+      alert('Erro ao pesquisar usuário' + error?.response?.data?.erro)
+    }
   }
 
   const aoClicarNoResultadoPesquisa = id => {
-    console.log('aoClicarNoResultadoPesquisa', { id })
+    setResultadoPesquisa([])
+    setTermoPesquisado('')
+    router.push(`/perfil/${id}`)
+  }
+
+  const redirecionarParaHome = () => {
+    router.push('/')
   }
 
   return (
     <header className="cabecalhoPrincipal">
       <div className="conteudoCabecalhoPrincipal">
         <div className="logocabecalhoPrincipal">
-          <Image src={logoHorizontal} alt="logo devagram" layout="fill" />
+          <Image
+            onClick={() => redirecionarParaHome()} //temos que o usar a arrow function pq o evento de click é um callBack
+            src={logoHorizontal}
+            alt="logo devagram"
+            layout="fill"
+          />
         </div>
         <div className="barraPesquisa">
           <div className="containerImagemLupa">
@@ -70,7 +71,7 @@ export default function Cabecalho() {
               nome={r.nome}
               email={r.email}
               key={r._id}
-              id={r.id}
+              id={r._id}
               onClick={aoClicarNoResultadoPesquisa}
             />
           ))}

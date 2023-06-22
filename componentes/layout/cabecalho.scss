@@ -51,26 +51,25 @@
     .resultadoPesquisa {
       display: flex;
       padding: 10px 16px;
+      cursor: pointer;
 
-      &:hover{
+      &:hover {
         background-color: $cinza;
       }
 
-      .avatar{
+      .avatar {
         width: 32px;
         height: 32px;
         margin-right: 8px;
       }
 
-
-     .informacoesUsuario{
-      > * {
-        display: flex;
-        font-size: 12px;
-        color: $cinza4;
+      .informacoesUsuario {
+        > * {
+          display: flex;
+          font-size: 12px;
+          color: $cinza4;
+        }
       }
-     }
-
     }
   }
 
@@ -87,6 +86,7 @@
       .logocabecalhoPrincipal {
         width: 180px;
         height: 40px;
+        cursor: pointer;
       }
 
       .barraPesquisa {
@@ -108,14 +108,13 @@
       }
     }
 
-    .resultadoPesquisaContainer{
+    .resultadoPesquisaContainer {
       width: 20%;
-      margin:auto;
+      margin: auto;
       cursor: pointer;
-      right:4%;
+      right: 4%;
       left: 3%;
       box-shadow: 0px 4px 5px $cinza2;
     }
-
   }
 }
