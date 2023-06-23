@@ -13,12 +13,21 @@ export default function Feed({ usuarioLogado }) {
           nome: 'Ricardo',
           avatar: null
         },
-        fotoDoPost: '',
-        descricao: '',
+        fotoDoPost: 'https://a4.espncdn.com/combiner/i?img=%2Fi%2Fespn%2Fmisc_logos%2F500%2Fnba.png',
+        descricao: 'Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma galera de tipos e os embaralhou para fazer um livro de espécimes de tipos.',
         curtidas: [],
         comentarios: [
           {
             nome: 'Fulano',
+            mensagem: 'Muito legal'
+          }
+          ,
+          {
+            nome: 'Fulano de tal',
+            mensagem: 'Muito legal'
+          },
+          {
+            nome: 'Fulano da esquina',
             mensagem: 'Muito legal'
           }
         ]
@@ -31,12 +40,20 @@ export default function Feed({ usuarioLogado }) {
           nome: 'camila',
           avatar: null
         },
-        fotoDoPost: '',
-        descricao: '',
+        fotoDoPost: 'https://a4.espncdn.com/combiner/i?img=%2Fi%2Fespn%2Fmisc_logos%2F500%2Fnba.png',
+        descricao: 'Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma galera de tipos e os embaralhou para fazer um livro de espécimes de tipos.',
         curtidas: [],
         comentarios: [
           {
             nome: 'Fulano',
+            mensagem: 'Muito legal'
+          },
+          {
+            nome: 'Fulano de tal',
+            mensagem: 'Muito legal'
+          },
+          {
+            nome: 'Fulano da esquina',
             mensagem: 'Muito legal'
           }
         ]
