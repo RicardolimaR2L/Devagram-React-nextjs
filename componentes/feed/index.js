@@ -11,10 +11,10 @@ export default function Feed({ usuarioLogado }) {
         usuario: {
           id: '1',
           nome: 'Ricardo',
-          avatar: null
+          avatar: ''
         },
         fotoDoPost: 'https://todepassagem.clickbus.com.br/wp-content/uploads/2021/05/Como-tirar-fotos-na-praia-scaled.jpg',
-        descricao: 'Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma galera de tipos e os embaralhou para fazer um livro de espécimes de tipos.',
+        descricao: 'Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma galera de tipos e os embaralhou para fazer um livros asdasdadas da asdasdasdas sd da dasdasdasdasadasadadadaaa de espécimes de tipos. que texto bacana',
         curtidas: [],
         comentarios: [
           {
@@ -38,10 +38,10 @@ export default function Feed({ usuarioLogado }) {
         usuario: {
           id: '2',
           nome: 'Camila',
-          avatar: null
+          avatar: ''
         },
         fotoDoPost: 'https://img.freepik.com/fotos-premium/praia-de-areia-de-verao-com-coqueiro-em-um-dia-claro_252965-1012.jpg',
-        descricao: 'Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma galera de tipos e os embaralhou para fazer um livro de espécimes de tipos.',
+        descricao: 'Que praia linda! ',
         curtidas: [],
         comentarios: [
           {
@@ -62,9 +62,14 @@ export default function Feed({ usuarioLogado }) {
   }, [usuarioLogado])
 
   return(
-    <div className='feedcontainer largura30pctDesktop'>
+    <div className='largura30pctDesktop'>
       {listaDePostagens.map(dadosPostagem=>(
-         <Postagem key={...dadosPostagem.id} {...dadosPostagem} /> //o spread operator(...) passa cada propriedade para componente como uma PROP individual 
+         <Postagem
+          key={...dadosPostagem.id} 
+          {...dadosPostagem} 
+          usuarioLogado={usuarioLogado}
+          
+          /> //o spread operator(...) passa cada propriedade para componente como uma PROP individual 
        ))} 
     </div>
   );

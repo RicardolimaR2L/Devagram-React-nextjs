@@ -1,20 +1,43 @@
 import Link from 'next/link'
 import Avatar from '../avatar'
 import Image from 'next/image'
-
+import { useState } from 'react'
 import imgCurtir from '@/public/imagens/curtir.svg'
 import imgCurtido from '@/public/imagens/curtido.svg'
 import imgComentarioAtivo from '@/public/imagens/comentarioAtivo.svg'
 import imgComentarioCinza from '@/public/imagens/comentarioCinza.svg'
+import { FazerComentario } from './FazerComentario'
+
+const tamanhoLimiteDescricao = 90
 
 export default function Postagem({
   usuario,
   fotoDoPost,
   descricao,
   curtidas,
-  comentarios
+  comentarios,
+  usuarioLogado
 }) {
-  console.log(usuario)
+  const [deveExibirSecaoParaComentar, setDeveExibirSecaoParaComentar] =
+    useState(false)
+
+  const [tamanhoAtualDaDescricao, setTamanhoAtualDaDescricao] = useState(
+    tamanhoLimiteDescricao
+  )
+  const exibirDescricaoCompleta = () => {
+    setTamanhoAtualDaDescricao(Number.MAX_SAFE_INTEGER)
+  }
+  const descricaoMaiorQueLimite = () => {
+    return descricao.length > tamanhoAtualDaDescricao
+  }
+
+  const obterDescricao = () => {
+    let mensagem = descricao.substring(0, tamanhoAtualDaDescricao)
+    if (descricaoMaiorQueLimite()) {
+      mensagem += '...'
+    }
+    return mensagem
+  }
 
   return (
     <div className="feedContainer">
@@ -25,7 +48,6 @@ export default function Postagem({
             <strong>{usuario.nome}</strong>
           </section>
         </Link>
-
         <div className="fotoDaPostagem">
           <img src={fotoDoPost} alt="foto da postagem" />
         </div>
@@ -43,7 +65,9 @@ export default function Postagem({
               alt="icone comentar"
               width={20}
               height={20}
-              onClick={() => console.log('Comentar')}
+              onClick={() =>
+                setDeveExibirSecaoParaComentar(!deveExibirSecaoParaComentar)
+              }
             />
 
             <span className="quantidadeDeCurtidas">
@@ -52,7 +76,17 @@ export default function Postagem({
           </div>
           <div className="descricaoDapostagem">
             <strong className="nomeUsuario">{usuario.nome}</strong>
-            <p className="descricao">{descricao}</p>
+            <p className="descricao">
+              {obterDescricao()}
+              {descricaoMaiorQueLimite() && (
+                <span
+                  onClick={exibirDescricaoCompleta}
+                  className="exibirDescricaoCompleta"
+                >
+                  mais
+                </span>
+              )}
+            </p>
           </div>
           <div className="comentariosDaPostagem">
             {comentarios.map((comentario, i) => (
@@ -63,6 +97,9 @@ export default function Postagem({
             ))}
           </div>
         </div>
+        {deveExibirSecaoParaComentar && (
+          <FazerComentario usuarioLogado={usuarioLogado} />
+        )}
       </div>
     </div>
   )
