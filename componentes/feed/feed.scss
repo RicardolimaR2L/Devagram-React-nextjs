@@ -1,13 +1,68 @@
 .feedContainer {
   padding-bottom: 60px;
   background-color: $branco;
+  margin-top: 16px;
 
   .postagem {
-    margin-top: 16px;
-  }
+    .cabecalhoPostagem {
+      display: flex;
+      align-items: center;
 
-  .avatar {
-    height: 32px;
-    width: 32px;
+      .avatar {
+        height: 32px;
+        width: 32px;
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+      strong {
+        font-size: 12px;
+        color: $cinza4;
+        text-decoration: none;
+      }
+    }
+    .fotoDaPostagem {
+      img {
+        width: 100%;
+        height: auto;
+        max-height: 360px;
+        object-fit: cover;
+      }
+    }
+
+    .rodapeDaPostagem {
+      padding: 5px 16px;
+
+      strong.nomeUsuario {
+        font-size: 12px;
+        float: left; //float faz com que o elemento deixe der ser um display block, deixando todo o conteudo a sua flutuando ao redor dele.
+        margin-right: 5px;
+      }
+      p.descricao {
+        font-size: 12px;
+        margin: 0 0 2px;
+      }
+
+      .acoesDaPostagem {
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+
+        > span {
+          margin-right: 5px !important;
+        }
+
+        .quantidadeDeCurtidas {
+          font-family: $fontLight;
+          font-size: 10px;
+          strong {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: $desktopBreakpoint) {
+    padding-top: 8px;
+    margin-top: 16px;
   }
 }

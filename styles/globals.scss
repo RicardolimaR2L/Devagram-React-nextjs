@@ -82,8 +82,14 @@ strong {
 body {
   @media screen and (min-width: $desktopBreakpoint) {
     background-color: $Cinza5;
-    background-image:url('/imagens/backgroundDesktop.svg')
+    background-image: url('/imagens/imagemDeFundoDesktop.svg');
+  }
+}
 
+.largura30pctDesktop {
+  @media screen and (min-width: $desktopBreakpoint) {
+    width: 30%;
+    margin: auto;
   }
 }
 

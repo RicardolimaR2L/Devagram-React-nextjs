@@ -13,7 +13,7 @@ export default function Feed({ usuarioLogado }) {
           nome: 'Ricardo',
           avatar: null
         },
-        fotoDoPost: 'https://a4.espncdn.com/combiner/i?img=%2Fi%2Fespn%2Fmisc_logos%2F500%2Fnba.png',
+        fotoDoPost: 'https://todepassagem.clickbus.com.br/wp-content/uploads/2021/05/Como-tirar-fotos-na-praia-scaled.jpg',
         descricao: 'Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma galera de tipos e os embaralhou para fazer um livro de espécimes de tipos.',
         curtidas: [],
         comentarios: [
@@ -37,10 +37,10 @@ export default function Feed({ usuarioLogado }) {
         id: '2',
         usuario: {
           id: '2',
-          nome: 'camila',
+          nome: 'Camila',
           avatar: null
         },
-        fotoDoPost: 'https://a4.espncdn.com/combiner/i?img=%2Fi%2Fespn%2Fmisc_logos%2F500%2Fnba.png',
+        fotoDoPost: 'https://img.freepik.com/fotos-premium/praia-de-areia-de-verao-com-coqueiro-em-um-dia-claro_252965-1012.jpg',
         descricao: 'Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma galera de tipos e os embaralhou para fazer um livro de espécimes de tipos.',
         curtidas: [],
         comentarios: [
@@ -62,7 +62,7 @@ export default function Feed({ usuarioLogado }) {
   }, [usuarioLogado])
 
   return(
-    <div className='feedcontainer'>
+    <div className='feedcontainer largura30pctDesktop'>
       {listaDePostagens.map(dadosPostagem=>(
          <Postagem key={...dadosPostagem.id} {...dadosPostagem} /> //o spread operator(...) passa cada propriedade para componente como uma PROP individual 
        ))} 
