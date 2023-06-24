@@ -1,5 +1,5 @@
 .feedContainer {
-  padding-bottom: 40px;
+  padding-bottom: 30px;
   background-color: $branco;
   margin-top: 16px;
 
@@ -13,6 +13,7 @@
     .cabecalhoPostagem {
       display: flex;
       align-items: center;
+      margin-bottom: 4px;
 
       strong {
         font-size: 12px;
