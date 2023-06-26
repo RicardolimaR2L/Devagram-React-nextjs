@@ -1,10 +1,24 @@
 import { useEffect, useState } from 'react'
-import Postagem from './postagem'
+import Postagem from './Postagem'
+import FeedService from '@/services/FeedService'
 
-export default function Feed({ usuarioLogado }) {
+
+const feedService = new FeedService();
+
+export default function Feed({ usuarioLogado, data }) {
   const [listaDePostagens, setListaDePostagens] = useState([])
-  useEffect(() => {
+  useEffect( () =>  {
     console.log('carregar o feed')
+
+const capturarData= async () =>{
+  const {data} =  await feedService.carregarPostagens();
+  console.log(data)
+}
+capturarData();
+if(capturarData !== null || capturarData !== 'undefined'){
+  return data
+}
+
     setListaDePostagens([ //exemplo mocado de postagem para fazer o teste do feed
       {
         id: '1',
@@ -74,3 +88,4 @@ export default function Feed({ usuarioLogado }) {
     </div>
   );
 }
+

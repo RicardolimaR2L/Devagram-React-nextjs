@@ -1,5 +1,5 @@
 .feedContainer {
-  padding-bottom: 30px;
+  padding-bottom: 60px;
   background-color: $branco;
   margin-top: 16px;
 
@@ -7,20 +7,21 @@
     .avatar {
       height: 32px;
       width: 32px;
-      margin-left: 8px;
       margin-right: 8px;
     }
+
     .cabecalhoPostagem {
       display: flex;
       align-items: center;
-      margin-bottom: 4px;
+      padding: 0 12px;
+      margin-bottom: 8px;
 
       strong {
         font-size: 12px;
         color: $cinza4;
-        text-decoration: none;
       }
     }
+
     .fotoDaPostagem {
       img {
         width: 100%;
@@ -35,12 +36,15 @@
 
       strong.nomeUsuario {
         font-size: 12px;
-        float: left; //float faz com que o elemento deixe der ser um display block, deixando todo o conteudo a sua flutuando ao redor dele.
-        margin-right: 5px;
+        float: left;
+        margin-right: 4px;
+        color: $cinza4;
       }
+
       p.descricao {
         font-size: 12px;
         margin: 0 0 2px;
+        color: $cinza4;
 
         .exibirDescricaoCompleta {
           font-size: 12px;
@@ -59,13 +63,21 @@
           margin-right: 5px !important;
         }
 
-        .quantidadeDeCurtidas {
+        .quantidadeCurtidas {
           font-family: $fontLight;
           font-size: 10px;
+          color: $cinza4;
+
           strong {
             font-size: 10px;
+            color: $cinza4;
           }
         }
+      }
+
+      .comentariosDaPublicacao {
+        max-height: 100px;
+        overflow-y: auto;
       }
     }
 
@@ -74,6 +86,7 @@
       align-items: center;
       padding: 0 12px;
       margin-bottom: 16px;
+
       textarea {
         resize: none;
         flex: 1;
@@ -85,7 +98,39 @@
       }
     }
   }
+
   @media screen and (min-width: $desktopBreakpoint) {
-    padding-top: 5px;
+    padding-bottom: 15px;
+    margin-top: 15px;
+
+    .postagem {
+      .cabecalhoPostagem {
+        cursor: pointer;
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+      }
+
+      .rodapeDaPostagem {
+        .acoesDaPostagem {
+          cursor: pointer;
+        }
+      }
+
+      .containerFazerComentario {
+        margin-top: 12px;
+
+        .btnPublicacao {
+          background-color: transparent;
+          color: $corPrimaria;
+          outline: none;
+          border: none;
+          font-size: 12px;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
