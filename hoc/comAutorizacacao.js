@@ -6,7 +6,7 @@ import Rodape from '@/componentes/layout/Rodape'
 const usuarioService = new UsuarioService()
 
 export default function comAutorizacacao(Componente) {
-  return props => {
+  return (props) => {
     const router = useRouter
 
     if (typeof window !== 'undefined') {
@@ -16,15 +16,19 @@ export default function comAutorizacacao(Componente) {
         return null
       }
 
-      const UsuarioLogado = usuarioService.obterInformacoesDousuarioLogado();
+      const usuarioLogado = usuarioService.obterInformacoesDousuarioLogado();
 
       return (
         <>
-          <Cabecalho UsuarioLogado={UsuarioLogado} />
-          <Componente UsuarioLogado={UsuarioLogado} {...props} />
-          <Rodape UsuarioLogado={UsuarioLogado} />
+          <Cabecalho usuarioLogado={usuarioLogado} />
+          <Componente usuarioLogado={usuarioLogado} {...props} />
+          <Rodape usuarioLogado={usuarioLogado} />
         </>
+      
       )
     }
+    return null;
   }
+
+
 }
