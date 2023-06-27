@@ -12,14 +12,13 @@ import UsuarioService from '@/services/UsuarioService'
 const usuarioService = new UsuarioService()
 
 export default function Login({ aposAutenticacao }) {
-  const [email, setEmail] = useState('')
-  const [senha, setsenha] = useState('')
+  const [email, setEmail] = useState("")
+  const [senha, setsenha] = useState("")
   const [estaSubmetendo, setEstaSubmetendo] = useState(false)
 
   const validarFormulario = () => {
     return (
-      (validarEmail(email) && validarSenha) ||
-      (validarSenha && validarEmail(email))
+      (validarEmail(email) && validarSenha)
     )
   }
 
@@ -28,8 +27,8 @@ export default function Login({ aposAutenticacao }) {
     if (!validarFormulario()) {
       return
     }
-    setEstaSubmetendo(true)
 
+    setEstaSubmetendo(true)
     try {
       await usuarioService.login({
         login: email,
