@@ -21,8 +21,8 @@ export default function Postagem({
   usuarioLogado,
   likes
 }) {
+  const [curtidasPostagem, setCurtidasPostagem] = useState(likes)
   const [comentariosPostagem, setComentarioPostagem] = useState(comentarios)
-
   const [deveExibirSecaoParaComentar, setDeveExibirSecaoparaComentar] =
     useState(false)
   const [tamanhoAtualDaDescricao, setTamanhoAtualDaDescricao] = useState(
@@ -49,23 +49,49 @@ export default function Postagem({
     return deveExibirSecaoParaComentar ? imgComentarioAtivo : imgComentarioCinza
   }
 
-  const comentar = async (comentario) => {
+  const comentar = async comentario => {
     try {
-      await feedService.adicionarComentario(id, comentario) 
+      await feedService.adicionarComentario(id, comentario)
       console.log('fazer comentario')
       setDeveExibirSecaoparaComentar(false)
-      setComentarioPostagem([//atualiza o comentario na tela sem ter que fazer uma chamada extra pra api e atualizar a pagina.  
+      setComentarioPostagem([
+        //atualiza o comentario na tela sem ter que fazer uma chamada extra pra api e atualizar a pagina.
         ...comentariosPostagem,
         {
           nome: usuarioLogado.nome,
           mensagem: comentario
         }
       ])
-
     } catch (e) {
       console.log('Erro ao fazer comentário' + e?.response?.data?.erro || '')
-
     }
+  }
+
+  const usuarioLogadoCurtiuPostagem = () => {
+    return curtidasPostagem.includes(usuarioLogado.id)
+  }
+
+  const alterarcurtida = async () => {
+    try {
+      await feedService.alterarcurtida(id)
+      if (usuarioLogadoCurtiuPostagem()) {
+        //tira o usuarioLogado da lista de curtidas
+        setCurtidasPostagem(
+          curtidasPostagem.filter(
+            idUsuarioQueCurtiu => idUsuarioQueCurtiu !== usuarioLogado.id
+          ) //
+        )
+      } else {
+        //adiciona o usuarioLogado na lista de curtidas
+        setCurtidasPostagem([...curtidasPostagem, usuarioLogado.id])
+      }
+    } catch (e) {
+      console.log('Erro ao alterar a curtida' + e?.response?.data?.erro || '')
+    }
+  }
+
+  const obterImagemCurtida = () => {
+    return usuarioLogadoCurtiuPostagem() ? imgCurtido : imgCurtir
   }
 
   return (
@@ -85,10 +111,11 @@ export default function Postagem({
         <div className="acoesDaPostagem">
           <Image
             className="span"
-            src={imgCurtir}
+            src={obterImagemCurtida()}
             alt="icone curtida"
-            width={15}
-            height={15}
+            width={20}
+            height={20}
+            onClick={alterarcurtida}
           />
           <Image
             className="span"
@@ -101,7 +128,7 @@ export default function Postagem({
             }
           />
           <span className="quantidadeCurtidas span">
-            Curtido por <strong>{likes} pessoas</strong>
+            Curtido por <strong>{curtidasPostagem.length} pessoas</strong>
           </span>
         </div>
         <div className="descricaoDaPostagem">

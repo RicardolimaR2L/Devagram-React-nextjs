@@ -5,75 +5,39 @@ import FeedService from '@/services/FeedService'
 
 const feedService = new FeedService();
 
-export default function Feed({ usuarioLogado, data }) {
+export default function Feed({ usuarioLogado}) {
   const [listaDePostagens, setListaDePostagens] = useState([])
-  useEffect( () =>  {
+  useEffect(() =>  {
     console.log('carregar o feed')
 
 const capturarData= async () =>{
+  setListaDePostagens([])
   const {data} =  await feedService.carregarPostagens();
-  console.log(data)
+  const postagensFormatadas= data.map((postagem)=>(
+    {
+    id:postagem._id,
+    usuario:{
+      id:postagem.userId,
+      nome: postagem.usuario.nome,
+      avatar: postagem.usuario.avatar
+    },
+    fotoDoPost: postagem.foto,
+    descricao: postagem.descricao,
+    likes: postagem.likes,
+    comentarios: postagem.comentarios.map(c =>({
+      nome:c.nome,
+      mensagem: c.comentario
+    }))
+    }
+    
+    ))
+  setListaDePostagens(postagensFormatadas);
+  
 }
 capturarData();
-if(capturarData !== null || capturarData !== 'undefined'){
-  return data
-}
+ 
+  }, [usuarioLogado]);
 
-    setListaDePostagens([ //exemplo mocado de postagem para fazer o teste do feed
-      {
-        id: '1',
-        usuario: {
-          id: '1',
-          nome: 'Ricardo',
-          avatar: ''
-        },
-        fotoDoPost: 'https://todepassagem.clickbus.com.br/wp-content/uploads/2021/05/Como-tirar-fotos-na-praia-scaled.jpg',
-        descricao: 'Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma galera de tipos e os embaralhou para fazer um livros asdasdadas da asdasdasdas sd da dasdasdasdasadasadadadaaa de espécimes de tipos. que texto bacana',
-        curtidas: [],
-        comentarios: [
-          {
-            nome: 'Fulano',
-            mensagem: 'Muito legal'
-          }
-          ,
-          {
-            nome: 'Fulano de tal',
-            mensagem: 'Muito legal'
-          },
-          {
-            nome: 'Fulano da esquina',
-            mensagem: 'Muito legal'
-          }
-        ]
-      },
-      
-      {
-        id: '2',
-        usuario: {
-          id: '2',
-          nome: 'Camila',
-          avatar: ''
-        },
-        fotoDoPost: 'https://img.freepik.com/fotos-premium/praia-de-areia-de-verao-com-coqueiro-em-um-dia-claro_252965-1012.jpg',
-        descricao: 'Que praia linda! ',
-        curtidas: [],
-        comentarios: [
-          {
-            nome: 'Fulano',
-            mensagem: 'Muito legal'
-          },
-          {
-            nome: 'Fulano de tal',
-            mensagem: 'Muito legal'
-          },
-          {
-            nome: 'Fulano da esquina',
-            mensagem: 'Muito legal'
-          }
-        ]
-      }
-    ])
-  }, [usuarioLogado])
 
   return(
     <div className=' feedContainer  largura30pctDesktop'>

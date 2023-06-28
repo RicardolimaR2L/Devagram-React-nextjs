@@ -13,11 +13,11 @@ export function FazerComentario({ usuarioLogado, comentar }) {
 
   const aoPressionarQualquerTecla = e => {//verifica se a tecla enter foi pressionada e executa o manipular comentario 
     if (e.key === 'Enter') {
-      manipularComentario()
+      fazerComentario()
     }
   }
 
-  const manipularComentario = () => {
+  const fazerComentario = () => {
     if (comentario.trim().length === 0 || !comentar) {//verifica o tamanho do comentario é maior  que zero e tamebm se o comentario existe 
       
     }
@@ -35,7 +35,10 @@ export function FazerComentario({ usuarioLogado, comentar }) {
         value={comentario}
         placeholder="Adicione um comentário..."
       ></textarea>
-      <button type="button" className="btnPublicacao desktop">
+      <button
+       type="button"
+       onClick={fazerComentario}
+       className="btnPublicacao desktop">
         Publicar
       </button>
     </div>
