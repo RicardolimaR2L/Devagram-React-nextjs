@@ -6,10 +6,11 @@ export default function CabecalhoComAcoes({
   iconeEsquerda,
   textoEsquerda = null,
   aoclicaAcaoEsquerda,
-  titulo
+  titulo,
+  elementoDireita
 }) {
   return (
-    <div className={`cabecalhoComAcoes${className}`}>
+    <div className={`cabecalhoComAcoes ${className}`}>
       {iconeEsquerda ? (
         <Image
           src={iconeEsquerda}
@@ -30,8 +31,15 @@ export default function CabecalhoComAcoes({
       )}
  
     <h3>{titulo}</h3>
+    {elementoDireita && ( 
+
+      <button 
+      type='button'
+      >
+        {elementoDireita}
+    </button>
     
-    
+      )}
     </div>
   )
 }
