@@ -4,29 +4,24 @@ import comAutorizacacao from '@/hoc/comAutorizacacao'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-function Perfil(usuarioLogado, ) {
+function Perfil(usuarioLogado) {
   const [usuario, setUsuario] = useState({}) //state mockado do titulo que é o nome do usuario
   const router = useRouter()
 
   useEffect(() => {
-    const atualizarOtitulo = async () => {
+    const atualizarOtitulo = () => {
       setUsuario({
         nome: 'Ricardo Lima'
       })
     }
 
     atualizarOtitulo() // Chama a função dentro do useEffect
-  }, [router.query.id]) //atualiza o nome do usuario de acordo com o id
+  }, [router.query.id]) // Adiciona "usuario" como uma dependência
 
   return (
     <>
       <div className="paginaPerfil">
-       <CabecalhoPerfil
-       usuarioLogado={usuarioLogado}
-       usuario={usuario}
-       
-       
-       />
+        <CabecalhoPerfil usuarioLogado={usuarioLogado} usuario={usuario} />
         <Feed usuarioLogado={usuarioLogado} />
       </div>
     </>
