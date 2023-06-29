@@ -8,23 +8,26 @@ export default function CabecalhoPerfil(usuario) {
     <div className="cabecalhoPerfil">
       <CabecalhoComAcoes
         iconeEsquerda={imgSetaEsquerda}
-        titulo={usuario.nome}
+        titulo={usuario}
       />
       <div className="statusPerfil">
         <Avatar src={usuario.avatar} />
         <div className="informacoesPerfil">
+
           <div className="statusContainer">
             <div className="status">
               <strong> 15 </strong>
-              <pan>Publicações</pan>
+              <span>Publicações</span>
             </div>
+
             <div className="status">
               <strong> 120</strong>
-              <pan>Seguidores</pan>
+              <span>Seguidores</span>
             </div>
+
             <div className="status">
-              <strong> 1 </strong>
-              <pan>Seguindo</pan>
+              <strong> 135 </strong>
+              <span>Seguindo</span>
             </div>
           </div>
           <Botao texto={'Seguir'} cor="primaria" />
