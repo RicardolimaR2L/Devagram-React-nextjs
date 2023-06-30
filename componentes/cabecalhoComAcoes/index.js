@@ -9,7 +9,7 @@ export default function CabecalhoComAcoes({
   elementoDireita
 }) {
   return (
-    <div className={`cabecalhoComAcoes ${className}`}>
+    <div className={`cabecalhoComAcoes  ${className}`}>
       {iconeEsquerda ? (
         <Image
           src={iconeEsquerda}

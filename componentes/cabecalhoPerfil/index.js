@@ -5,7 +5,7 @@ import Botao from '../botao'
 
 export default function CabecalhoPerfil(usuario) {
   return (
-    <div className="cabecalhoPerfil">
+    <div className="cabecalhoPerfil largura30pctDesktop">
       <CabecalhoComAcoes
         iconeEsquerda={imgSetaEsquerda}
         titulo={usuario}
