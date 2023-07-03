@@ -31,7 +31,7 @@ export default function Navegacao({ className }) {
 
   useEffect(() => {
     definirRotaAtiva()
-  }, [])
+  }, [router.asPath])
 
   const definirRotaAtiva = () => {
     const chaveDoMapaDeRotas = Object.keys(mapaDeRotas)

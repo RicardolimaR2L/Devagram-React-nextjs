@@ -12,14 +12,12 @@ import UsuarioService from '@/services/UsuarioService'
 const usuarioService = new UsuarioService()
 
 export default function Login({ aposAutenticacao }) {
-  const [email, setEmail] = useState("")
-  const [senha, setsenha] = useState("")
+  const [email, setEmail] = useState('')
+  const [senha, setsenha] = useState('')
   const [estaSubmetendo, setEstaSubmetendo] = useState(false)
 
   const validarFormulario = () => {
-    return (
-      (validarEmail(email) && validarSenha)
-    )
+    return validarEmail(email) && validarSenha
   }
 
   const aoSubmeter = async e => {
@@ -38,9 +36,7 @@ export default function Login({ aposAutenticacao }) {
       if (aposAutenticacao) {
         aposAutenticacao()
       }
-      console.log(aposAutenticacao)
     } catch (error) {
-      console.log(error)
       alert('Erro ao realizar o login ' + error?.response?.data?.erro)
     }
     setEstaSubmetendo(false)

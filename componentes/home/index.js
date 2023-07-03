@@ -5,7 +5,7 @@ import  Feed  from '../feed';
 function Home({usuarioLogado}) {
   return(
 
-    <Feed usuarioLogado={usuarioLogado}/>
+    <Feed usuarioLogado={usuarioLogado} />
   ); 
 }
 

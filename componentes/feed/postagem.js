@@ -5,7 +5,7 @@ import imgCurtir from '../../public/imagens/curtir.svg'
 import imgCurtido from '../../public/imagens/curtido.svg'
 import imgComentarioAtivo from '../../public/imagens/comentarioAtivo.svg'
 import imgComentarioCinza from '../../public/imagens/comentarioCinza.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FazerComentario } from './FazerComentario'
 import FeedService from '@/services/FeedService'
 
@@ -22,7 +22,7 @@ export default function Postagem({
   likes
 }) {
   const [curtidasPostagem, setCurtidasPostagem] = useState(likes)
-  const [comentariosPostagem, setComentarioPostagem] = useState(comentarios)
+  const [comentariosPostagem, setComentarioPostagem] = useState([])
   const [deveExibirSecaoParaComentar, setDeveExibirSecaoparaComentar] =
     useState(false)
   const [tamanhoAtualDaDescricao, setTamanhoAtualDaDescricao] = useState(
@@ -52,7 +52,7 @@ export default function Postagem({
   const comentar = async comentario => {
     try {
       await feedService.adicionarComentario(id, comentario)
-      console.log('fazer comentario')
+
       setDeveExibirSecaoparaComentar(false)
       setComentarioPostagem([
         //atualiza o comentario na tela sem ter que fazer uma chamada extra pra api e atualizar a pagina.
@@ -147,7 +147,7 @@ export default function Postagem({
         </div>
 
         <div className="comentariosDaPublicacao">
-          {comentariosPostagem.map((comentario, i) => (
+          {comentariosPostagem?.map((comentario, i) => (
             <div className="comentario" key={i}>
               <strong className="nomeUsuario">{comentario.nome}</strong>
               <p className="descricao">{comentario.mensagem}</p>
