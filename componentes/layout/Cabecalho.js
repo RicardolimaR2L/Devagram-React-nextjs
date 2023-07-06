@@ -5,7 +5,7 @@ import lupa from '@/public/imagens/lupa.svg'
 import Navegacao from './Navegacao'
 import ResultadoPesquisa from './ResultadoPesquisa'
 import UsuarioService from '@/services/UsuarioService'
-import { Router, useRouter } from 'next/router'
+import { router, useRouter } from 'next/router'
 
 const usuarioService = new UsuarioService()
 
