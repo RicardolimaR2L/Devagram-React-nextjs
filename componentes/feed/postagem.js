@@ -5,7 +5,7 @@ import imgCurtir from '../../public/imagens/curtir.svg'
 import imgCurtido from '../../public/imagens/curtido.svg'
 import imgComentarioAtivo from '../../public/imagens/comentarioAtivo.svg'
 import imgComentarioCinza from '../../public/imagens/comentarioCinza.svg'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FazerComentario } from './FazerComentario'
 import FeedService from '@/services/FeedService'
 
@@ -22,7 +22,7 @@ export default function Postagem({
   likes
 }) {
   const [curtidasPostagem, setCurtidasPostagem] = useState(likes)
-  const [comentariosPostagem, setComentarioPostagem] = useState([])
+  const [comentariosPostagem, setComentarioPostagem] = useState(comentarios)
   const [deveExibirSecaoParaComentar, setDeveExibirSecaoparaComentar] =
     useState(false)
   const [tamanhoAtualDaDescricao, setTamanhoAtualDaDescricao] = useState(
@@ -52,7 +52,6 @@ export default function Postagem({
   const comentar = async comentario => {
     try {
       await feedService.adicionarComentario(id, comentario)
-
       setDeveExibirSecaoparaComentar(false)
       setComentarioPostagem([
         //atualiza o comentario na tela sem ter que fazer uma chamada extra pra api e atualizar a pagina.
@@ -96,12 +95,12 @@ export default function Postagem({
 
   return (
     <div className="postagem">
-      <Link href={`/perfil/${usuario.id}`}>
-        <section className="cabecalhoPostagem">
-          <Avatar src={usuario.avatar} />
-          <strong>{usuario.nome}</strong>
-        </section>
-      </Link>
+            <Link href={`/perfil/${usuario.id}`}>
+                <section className="cabecalhoPostagem">
+                    <Avatar src={usuario.avatar} />
+                    <strong>{usuario.nome}</strong>
+                </section>
+            </Link>
 
       <div className="fotoDaPostagem">
         <img src={fotoDoPost} alt="Descrição da imagem" />
@@ -132,7 +131,7 @@ export default function Postagem({
           </span>
         </div>
         <div className="descricaoDaPostagem">
-          <strong className="nomeUsuario">{usuario.nome}</strong>
+          <strong className="nomeUsuario">{usuario?.nome}</strong>
           <p className="descricao">
             {obterDescricao()}
             {descricaoMaiorQueLimite() && (
@@ -147,7 +146,7 @@ export default function Postagem({
         </div>
 
         <div className="comentariosDaPublicacao">
-          {comentariosPostagem?.map((comentario, i) => (
+          {Array.isArray(comentariosPostagem) && comentariosPostagem?.map((comentario, i) => (
             <div className="comentario" key={i}>
               <strong className="nomeUsuario">{comentario.nome}</strong>
               <p className="descricao">{comentario.mensagem}</p>
