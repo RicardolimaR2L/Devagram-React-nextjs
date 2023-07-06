@@ -3,6 +3,14 @@
     background-color: $branco;
     margin-bottom: -15px;
 
+    .bordaDoCabecalhoPerfil{
+      margin:0;
+      border: none;
+      background-color: $cinza1;
+      height: 1px;
+    
+    }
+
     .statusPerfil {
       display: flex;
       align-items: center;
@@ -54,9 +62,6 @@
       }
     .bordaDoCabecalhoPerfil{
       margin:0 auto;
-      border: none;
-      background-color: $cinza1;
-      height: 1px;
       width: 94%;
     }
     
