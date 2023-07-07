@@ -2,12 +2,45 @@ import imgSetaEsquerda from '@/public/imagens/setaEsquerda.svg'
 import CabecalhoComAcoes from '../cabecalhoComAcoes'
 import Avatar from '../avatar'
 import Botao from '../botao'
+import { useEffect, useState } from 'react'
+import UsuarioService from '@/services/UsuarioService'
 
-export default function CabecalhoPerfil({ 
-  
-  usuario
-   
-}) {
+const usuarioService = new UsuarioService()
+
+export default function CabecalhoPerfil({ usuario }) {
+  const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false)
+  useEffect(() => {
+    const verificarUsuarioSeguido = () => {
+      if (!usuario) {
+        return null
+      }
+      setEstaSeguindoOUsuario(usuario.segueEsseUsuario)
+    }
+    verificarUsuarioSeguido()
+  }, [usuario])
+    
+    const obterTextoBotaoSeguir = () => {
+      if (estaSeguindoOUsuario) {
+      return 'Deixar de seguir'
+    }
+    return 'Seguir'
+  }
+
+  const obterCorDoBotaoSeguir = () => {
+    if (estaSeguindoOUsuario) {
+      return 'invertido'
+    }
+    return 'primaria'
+  }
+
+  const manipularCliqueBotaoSeguir = async () => {
+    try {
+      setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
+    await usuarioService.alternarSeguir(usuario?._id)
+    } catch (error) {
+      //alert(`Erro ao seguir/deixar de seguir!`)
+    }
+  }
 
   return (
     <div className="cabecalhoPerfil largura30pctDesktop">
@@ -34,7 +67,11 @@ export default function CabecalhoPerfil({
               <span>Seguindo</span>
             </div>
           </div>
-          <Botao texto={'Seguir'} cor="primaria" />
+          <Botao
+            texto={obterTextoBotaoSeguir()}
+            cor={obterCorDoBotaoSeguir()}
+            manipularclique={manipularCliqueBotaoSeguir()}
+          />
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 const usuarioService = new UsuarioService()
 
 function Perfil(usuarioLogado) {
-  const [usuario, setUsuario] = useState([]) 
+  const [usuario, setUsuario] = useState([])
   const router = useRouter()
 
   const obterPerfil = async idUsuario => {
@@ -17,15 +17,13 @@ function Perfil(usuarioLogado) {
       const { data } = await usuarioService.obterPerfil(idUsuario)
       return data
     } catch (error) {
-      alert(
-        'Erro ao obter o perfil do usuário'
-      )
+      alert('Erro ao obter o perfil do usuário')
     }
   }
 
   useEffect(() => {
     if (!router.query.id) {
-      return;
+      return
     }
 
     const usuarioId =
@@ -42,13 +40,12 @@ function Perfil(usuarioLogado) {
 
   return (
     <>
-      <div className="paginaPerfil">
+    <div>
+      <header className="paginaPerfil">
         <CabecalhoPerfil usuarioLogado={usuarioLogado} usuario={usuario} />
-        <Feed
-          usuarioLogado={usuarioLogado}
-          idUsuario={usuario?._id}
-        />
-      </div>
+        <Feed usuarioLogado={usuarioLogado} idUsuario={usuario?._id} />
+      </header>
+    </div>
     </>
   )
 }
