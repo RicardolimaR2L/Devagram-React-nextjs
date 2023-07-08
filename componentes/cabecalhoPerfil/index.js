@@ -4,23 +4,27 @@ import Avatar from '../avatar'
 import Botao from '../botao'
 import { useEffect, useState } from 'react'
 import UsuarioService from '@/services/UsuarioService'
+import { useRouter } from 'next/router'
 
 const usuarioService = new UsuarioService()
+const router = useRouter
 
 export default function CabecalhoPerfil({ usuario }) {
   const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false)
+  const [quantidadeSeguidores, setQuantidadeSeguidores] = useState(0)
   useEffect(() => {
     const verificarUsuarioSeguido = () => {
       if (!usuario) {
         return null
       }
       setEstaSeguindoOUsuario(usuario.segueEsseUsuario)
+      setQuantidadeSeguidores(usuario.seguidores)
     }
     verificarUsuarioSeguido()
   }, [usuario])
-    
-    const obterTextoBotaoSeguir = () => {
-      if (estaSeguindoOUsuario) {
+
+  const obterTextoBotaoSeguir = () => {
+    if (estaSeguindoOUsuario) {
       return 'Deixar de seguir'
     }
     return 'Seguir'
@@ -35,16 +39,30 @@ export default function CabecalhoPerfil({ usuario }) {
 
   const manipularCliqueBotaoSeguir = async () => {
     try {
-      setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
-    await usuarioService.alternarSeguir(usuario?._id)
+      await usuarioService.alternarSeguir(usuario?._id)
+      setEstaSeguindoOUsuario(
+        !estaSeguindoOUsuario
+          ? quantidadeSeguidores - 1
+          : quantidadeSeguidores + 1
+      )
     } catch (error) {
       //alert(`Erro ao seguir/deixar de seguir!`)
     }
   }
+ const aoclicarNaSetaEsquerda = () =>{
+ 
+  router?.back();
+
+ }
+
+
 
   return (
     <div className="cabecalhoPerfil largura30pctDesktop">
-      <CabecalhoComAcoes iconeEsquerda={imgSetaEsquerda} titulo={usuario} />
+      <CabecalhoComAcoes 
+      iconeEsquerda={imgSetaEsquerda}
+      aoClicarAcaoEsquerda={aoclicarNaSetaEsquerda} 
+      titulo={usuario} />
 
       <hr className="bordaDoCabecalhoPerfil" />
 
@@ -58,7 +76,7 @@ export default function CabecalhoPerfil({ usuario }) {
             </div>
 
             <div className="status">
-              <strong> {usuario?.seguidores}</strong>
+              <strong> {quantidadeSeguidores}</strong>
               <span>Seguidores</span>
             </div>
 

@@ -6,6 +6,7 @@ const feedService = new FeedService()
 
 export default function Feed({ usuarioLogado, idUsuario }) {
   const [listaDePostagens, setListaDePostagens] = useState([])
+
   useEffect(() => {
     const capturarData = async () => {
       setListaDePostagens([]);
