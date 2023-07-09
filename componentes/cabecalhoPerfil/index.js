@@ -40,29 +40,29 @@ export default function CabecalhoPerfil({ usuario }) {
   const manipularCliqueBotaoSeguir = async () => {
     try {
       await usuarioService.alternarSeguir(usuario?._id)
-      setEstaSeguindoOUsuario(
-        !estaSeguindoOUsuario
+      setQuantidadeSeguidores(
+        estaSeguindoOUsuario
           ? quantidadeSeguidores - 1
           : quantidadeSeguidores + 1
       )
+      setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
+      return
     } catch (error) {
-      //alert(`Erro ao seguir/deixar de seguir!`)
+      alert(`Erro ao seguir/deixar de seguir!`)
     }
   }
- const aoclicarNaSetaEsquerda = () =>{
- 
-  router?.back();
 
- }
-
-
+  const aoClicarNaSetaEsquerda = () => {
+    router.back()
+  }
 
   return (
     <div className="cabecalhoPerfil largura30pctDesktop">
-      <CabecalhoComAcoes 
-      iconeEsquerda={imgSetaEsquerda}
-      aoClicarAcaoEsquerda={aoclicarNaSetaEsquerda} 
-      titulo={usuario} />
+      <CabecalhoComAcoes
+        iconeEsquerda={imgSetaEsquerda}
+        aoClicarAcaoEsquerda={aoClicarNaSetaEsquerda}
+        titulo={usuario} // Corrigindo para exibir o atributo correto do objeto 'usuario'
+      />
 
       <hr className="bordaDoCabecalhoPerfil" />
 
@@ -88,7 +88,7 @@ export default function CabecalhoPerfil({ usuario }) {
           <Botao
             texto={obterTextoBotaoSeguir()}
             cor={obterCorDoBotaoSeguir()}
-            manipularclique={manipularCliqueBotaoSeguir()}
+            manipularClique={manipularCliqueBotaoSeguir} // Removendo os parênteses para passar a função corretamente
           />
         </div>
       </div>
