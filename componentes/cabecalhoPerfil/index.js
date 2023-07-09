@@ -7,9 +7,9 @@ import UsuarioService from '@/services/UsuarioService'
 import { useRouter } from 'next/router'
 
 const usuarioService = new UsuarioService()
-const router = useRouter
 
 export default function CabecalhoPerfil({ usuario }) {
+  const router = useRouter();
   const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false)
   const [quantidadeSeguidores, setQuantidadeSeguidores] = useState(0)
   useEffect(() => {
@@ -46,7 +46,6 @@ export default function CabecalhoPerfil({ usuario }) {
           : quantidadeSeguidores + 1
       )
       setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
-      return
     } catch (error) {
       alert(`Erro ao seguir/deixar de seguir!`)
     }
@@ -88,7 +87,7 @@ export default function CabecalhoPerfil({ usuario }) {
           <Botao
             texto={obterTextoBotaoSeguir()}
             cor={obterCorDoBotaoSeguir()}
-            manipularClique={manipularCliqueBotaoSeguir} // Removendo os parênteses para passar a função corretamente
+            manipularClique={manipularCliqueBotaoSeguir} 
           />
         </div>
       </div>
