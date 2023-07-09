@@ -32,6 +32,10 @@ export default function Feed({ usuarioLogado, idUsuario }) {
     capturarData()
   }, [usuarioLogado, idUsuario])
 
+  if(!listaDePostagens.length){
+    return null
+  }
+
   return (
     <div className=" feedContainer  largura30pctDesktop">
       {listaDePostagens?.map(dadosPostagem => (
