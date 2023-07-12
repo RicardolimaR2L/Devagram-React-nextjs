@@ -38,7 +38,6 @@ function Perfil(usuarioLogado) {
       router.query.id == 'eu'
         ? usuarioService.obterInformacoesDousuarioLogado()?.id
         : router.query.id
-    console.log('userId dentro useEfecct ', usuarioId)
     const fetchPerfil = async () => {
       const dadosPerfil = await obterPerfil(usuarioId)
       setUsuario(dadosPerfil)

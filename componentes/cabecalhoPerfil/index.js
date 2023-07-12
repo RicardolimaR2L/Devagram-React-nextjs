@@ -8,55 +8,55 @@ import { useRouter } from 'next/router'
 
 const usuarioService = new UsuarioService()
 
-export default function CabecalhoPerfil({
-   usuario,
-   estaNoPerfilPessoal 
-  
-  }) {
-  const router = useRouter();
+export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
+  const router = useRouter()
   const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false)
   const [quantidadeSeguidores, setQuantidadeSeguidores] = useState(0)
   
+
   useEffect(() => {
     const verificarUsuarioSeguido = () => {
-      console.log('usuario' , usuario)
       if (!usuario) {
         return null
       }
-      setEstaSeguindoOUsuario(usuario.segueEsseUsuario)
+      setEstaSeguindoOUsuario(usuario.segueEsseUsuario)//o erro pode ser aqui pois eu nao estou acessando o segueEsseUsuario
       setQuantidadeSeguidores(usuario.seguidores)
+      console.log(usuario.segueEsseUsuario)//ele ta vindo como undefined
     }
     verificarUsuarioSeguido()
-  }, [usuario])
+  }, [usuario, estaNoPerfilPessoal ])
 
   const obterTextoBotaoPrincipal = () => {
-   if(estaNoPerfilPessoal){
-    return 'Editar perfil'
-   }
-   
-    if (estaSeguindoOUsuario) {
-      return 'Deixar de seguir'
+    if (estaNoPerfilPessoal) {
+        return 'Editar perfil';
     }
-    return 'Seguir'
-  }
 
-  const obterCorDoBotaoPrincipal = () => {
-   if( estaNoPerfilPessoal || estaSeguindoOUsuario ){
+    if (estaSeguindoOUsuario) {
+        return 'Deixar de seguir';
+    }
 
-     return 'invertido'
-   }
-    return 'primaria'
-  }
+    return 'Seguir';
+}
+
+const obterCorDoBotaoPrincipal = () => {
+    if (estaSeguindoOUsuario || estaNoPerfilPessoal) {
+        return 'invertido';
+    }
+
+    return 'primaria';
+}
+
+
   const manipularCliqueBotaoPrincipal = async () => {
-    if(estaNoPerfilPessoal){
+    if (estaNoPerfilPessoal) {
       router.push('/perfil/editar')
     }
     try {
       await usuarioService.alternarSeguir(usuario?._id)
       setQuantidadeSeguidores(
-        estaSeguindoOUsuario
-          ? quantidadeSeguidores - 1
-          : quantidadeSeguidores + 1
+        estaSeguindoOUsuario 
+        ? quantidadeSeguidores - 1
+        : quantidadeSeguidores + 1
       )
       setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
     } catch (error) {
@@ -71,13 +71,11 @@ export default function CabecalhoPerfil({
 
   return (
     <div className="cabecalhoPerfil largura30pctDesktop">
-      
-        <CabecalhoComAcoes
+      <CabecalhoComAcoes
         iconeEsquerda={estaNoPerfilPessoal ? null : imgSetaEsquerda}
         aoClicarAcaoEsquerda={aoClicarNaSetaEsquerda}
-        titulo={usuario} // Corrigindo para exibir o atributo correto do objeto 'usuario'
-        />
-
+        titulo={usuario}
+      />
 
       <hr className="bordaDoCabecalhoPerfil" />
 
@@ -103,7 +101,7 @@ export default function CabecalhoPerfil({
           <Botao
             texto={obterTextoBotaoPrincipal()}
             cor={obterCorDoBotaoPrincipal()}
-            manipularClique={manipularCliqueBotaoPrincipal} 
+            manipularClique={manipularCliqueBotaoPrincipal}
           />
         </div>
       </div>

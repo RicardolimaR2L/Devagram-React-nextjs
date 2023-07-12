@@ -28,13 +28,13 @@ export default function Postagem({
   const [tamanhoAtualDaDescricao, setTamanhoAtualDaDescricao] = useState(
     tamanhoLimiteDescricao
   )
+  const exibirDescricaoCompleta = () => {
+    setTamanhoAtualDaDescricao(Number.MAX_SAFE_INTEGER)
+  }
+    
 
   const descricaoMaiorQueLimite = () => {
     return descricao.length > tamanhoAtualDaDescricao
-  }
-
-  const exibirDescricaoCompleta = () => {
-    setTamanhoAtualDaDescricao(Number.MAX_SAFE_INTEGER)
   }
 
   const obterDescricao = () => {

@@ -4,13 +4,13 @@ import FeedService from '@/services/FeedService'
 
 const feedService = new FeedService()
 
-export default function Feed({ usuarioLogado, idUsuario }) {
+export default function Feed({ usuarioLogado,  usuarioPerfil }) {
   const [listaDePostagens, setListaDePostagens] = useState([])
 
   useEffect(() => {
     const capturarData = async () => {
       setListaDePostagens([]);
-        const { data } = await feedService.carregarPostagens(idUsuario?.usuarioPerfil?._id);
+        const { data } = await feedService.carregarPostagens(usuarioPerfil?._id);
 
       const postagensFormatadas = data.map(postagem => ({
         id: postagem._id,
@@ -30,7 +30,7 @@ export default function Feed({ usuarioLogado, idUsuario }) {
       setListaDePostagens(postagensFormatadas)
     }
     capturarData()
-  }, [usuarioLogado, idUsuario])
+  }, [usuarioLogado,  usuarioPerfil])
 
   if(!listaDePostagens.length){
     return null
