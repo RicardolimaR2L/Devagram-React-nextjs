@@ -64,7 +64,8 @@ export default function cadastro() {
         senha
       })
       router.push('/')
-    } catch (erro) {
+    } catch (error) {
+      console.log(error)
       alert('Erro ao cadastrar usuário' + erro?.response?.data?.erro)
     }
     setEstaSubmetendo(false)
