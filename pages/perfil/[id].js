@@ -1,0 +1,65 @@
+import CabecalhoPerfil from '@/componentes/cabecalhoPerfil'
+import Feed from '@/componentes/feed'
+import comAutorizacacao from '@/hoc/comAutorizacacao'
+import UsuarioService from '@/services/UsuarioService'
+
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+
+const usuarioService = new UsuarioService()
+
+function Perfil(usuarioLogado) {
+  const [usuario, setUsuario] = useState([])
+  const router = useRouter()
+
+  const obterPerfil = async idUsuario => {
+    try {
+      const usuario = usuarioLogado.usuarioLogado
+      const { data } = await usuarioService.obterPerfil(
+        estaNoPerfilPessoal() ? usuario.id : idUsuario
+      )
+      return data
+    } catch (error) {
+      console.log(error)
+      alert('Erro ao obter o perfil do usuário')
+    }
+  }
+
+  const estaNoPerfilPessoal = () => {
+    return router.query.id === 'eu'
+  }
+
+  useEffect(() => {
+    if (!router.query.id) {
+      return
+    }
+
+    const usuarioId =
+      router.query.id == 'eu'
+        ? usuarioService.obterInformacoesDousuarioLogado()?.id
+        : router.query.id
+    console.log('userId dentro useEfecct ', usuarioId)
+    const fetchPerfil = async () => {
+      const dadosPerfil = await obterPerfil(usuarioId)
+      setUsuario(dadosPerfil)
+    }
+    fetchPerfil()
+  }, [router.query.id])
+
+  return (
+    <>
+      <div>
+        <header className="paginaPerfil">
+          <CabecalhoPerfil
+            usuarioLogado={usuarioLogado}
+            usuario={usuario}
+            estaNoPerfilPessoal={estaNoPerfilPessoal()}
+          />
+          <Feed usuarioLogado={usuarioLogado} idUsuario={usuario?._id} />
+        </header>
+      </div>
+    </>
+  )
+}
+
+export default comAutorizacacao(Perfil)
