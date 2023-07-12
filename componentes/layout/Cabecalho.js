@@ -30,6 +30,7 @@ export default function Cabecalho() {
       const { data } = await usuarioService.pesquisar(termoPesquisado)
       setResultadoPesquisa(data)
     } catch (error) {
+      console.log(error)
       alert('Erro ao pesquisar usuário' + error?.response?.data?.erro)
     }
   }

@@ -37,6 +37,7 @@ export default function Login({ aposAutenticacao }) {
         aposAutenticacao()
       }
     } catch (error) {
+      console.log(error)
       alert('Erro ao realizar o login ' + error?.response?.data?.erro)
     }
     setEstaSubmetendo(false)

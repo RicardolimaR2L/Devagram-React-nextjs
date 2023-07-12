@@ -61,7 +61,8 @@ export default function Postagem({
           mensagem: comentario
         }
       ])
-    } catch (e) {
+    } catch (error) {
+      console.log(error)
       console.log('Erro ao fazer comentário' + e?.response?.data?.erro || '')
     }
   }
@@ -84,7 +85,8 @@ export default function Postagem({
         //adiciona o usuarioLogado na lista de curtidas
         setCurtidasPostagem([...curtidasPostagem, usuarioLogado.id])
       }
-    } catch (e) {
+    } catch (error) {
+      console.log(error)
       console.log('Erro ao alterar a curtida' + e?.response?.data?.erro || '')
     }
   }
