@@ -8,12 +8,18 @@ import { useRouter } from 'next/router'
 
 const usuarioService = new UsuarioService()
 
-export default function CabecalhoPerfil({ usuario }) {
+export default function CabecalhoPerfil({
+   usuario,
+   estaNoPerfilPessoal 
+  
+  }) {
   const router = useRouter();
   const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false)
   const [quantidadeSeguidores, setQuantidadeSeguidores] = useState(0)
+  
   useEffect(() => {
     const verificarUsuarioSeguido = () => {
+      console.log('usuario' , usuario)
       if (!usuario) {
         return null
       }
@@ -23,21 +29,28 @@ export default function CabecalhoPerfil({ usuario }) {
     verificarUsuarioSeguido()
   }, [usuario])
 
-  const obterTextoBotaoSeguir = () => {
+  const obterTextoBotaoPrincipal = () => {
+   if(estaNoPerfilPessoal){
+    return 'Editar perfil'
+   }
+   
     if (estaSeguindoOUsuario) {
       return 'Deixar de seguir'
     }
     return 'Seguir'
   }
 
-  const obterCorDoBotaoSeguir = () => {
-    if (estaSeguindoOUsuario) {
-      return 'invertido'
-    }
+  const obterCorDoBotaoPrincipal = () => {
+   if( estaNoPerfilPessoal || estaSeguindoOUsuario ){
+
+     return 'invertido'
+   }
     return 'primaria'
   }
-
-  const manipularCliqueBotaoSeguir = async () => {
+  const manipularCliqueBotaoPrincipal = async () => {
+    if(estaNoPerfilPessoal){
+      router.push('/perfil/editar')
+    }
     try {
       await usuarioService.alternarSeguir(usuario?._id)
       setQuantidadeSeguidores(
@@ -47,7 +60,8 @@ export default function CabecalhoPerfil({ usuario }) {
       )
       setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
     } catch (error) {
-      alert(`Erro ao seguir/deixar de seguir!`)
+      console.log(error)
+      alert('Erro ao Seguir/Deixar de seguir')
     }
   }
 
@@ -57,11 +71,13 @@ export default function CabecalhoPerfil({ usuario }) {
 
   return (
     <div className="cabecalhoPerfil largura30pctDesktop">
-      <CabecalhoComAcoes
-        iconeEsquerda={imgSetaEsquerda}
+      
+        <CabecalhoComAcoes
+        iconeEsquerda={estaNoPerfilPessoal ? null : imgSetaEsquerda}
         aoClicarAcaoEsquerda={aoClicarNaSetaEsquerda}
         titulo={usuario} // Corrigindo para exibir o atributo correto do objeto 'usuario'
-      />
+        />
+
 
       <hr className="bordaDoCabecalhoPerfil" />
 
@@ -85,9 +101,9 @@ export default function CabecalhoPerfil({ usuario }) {
             </div>
           </div>
           <Botao
-            texto={obterTextoBotaoSeguir()}
-            cor={obterCorDoBotaoSeguir()}
-            manipularClique={manipularCliqueBotaoSeguir} 
+            texto={obterTextoBotaoPrincipal()}
+            cor={obterCorDoBotaoPrincipal()}
+            manipularClique={manipularCliqueBotaoPrincipal} 
           />
         </div>
       </div>
