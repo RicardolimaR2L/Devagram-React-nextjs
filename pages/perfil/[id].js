@@ -10,13 +10,13 @@ const usuarioService = new UsuarioService()
 
 function Perfil(usuarioLogado) {
   const [usuario, setUsuario] = useState([])
-  const router = useRouter()
+  const router = useRouter();
 
   const obterPerfil = async idUsuario => {
     try {
-      const usuario = usuarioLogado.usuarioLogado
+      const User = usuarioLogado.usuarioLogado
       const { data } = await usuarioService.obterPerfil(
-        estaNoPerfilPessoal() ? usuario.id : idUsuario
+        estaNoPerfilPessoal() ? User.id : idUsuario
       )
       return data
     } catch (error) {
