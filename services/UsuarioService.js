@@ -23,7 +23,7 @@ export default class UsuarioService extends HttpService {
     return localStorage.getItem('token') !== null
   }
   async pesquisar(termoDaPesquisa) {
-    return this.get('/pesquisa?filter=' + termoDaPesquisa)
+    return this.get('/pesquisa?filtro=' + termoDaPesquisa)
   }
 
   async obterPerfil(idUsuario) {
