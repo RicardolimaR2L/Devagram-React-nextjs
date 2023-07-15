@@ -40,9 +40,9 @@ export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
 
 const obterCorDoBotaoPrincipal = () => {
     if (estaSeguindoOUsuario || estaNoPerfilPessoal) {
-        return 'invertido';
+      return 'invertido';
     }
-
+    
     return 'primaria';
 }
 
