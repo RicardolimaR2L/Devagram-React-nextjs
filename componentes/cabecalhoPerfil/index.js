@@ -8,45 +8,46 @@ import { useRouter } from 'next/router'
 
 const usuarioService = new UsuarioService()
 
-export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
+export default function CabecalhoPerfil({
+  usuario,
+  estaNoPerfilPessoal,
+  segueEsseUsuario
+}) {
   const router = useRouter()
   const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false)
   const [quantidadeSeguidores, setQuantidadeSeguidores] = useState(0)
-  
 
   useEffect(() => {
     const verificarUsuarioSeguido = () => {
       if (!usuario) {
         return null
       }
-      setEstaSeguindoOUsuario(usuario.segueEsseUsuario)//o erro pode ser aqui pois eu nao estou acessando o segueEsseUsuario
+      setEstaSeguindoOUsuario(usuario.segueEsseUsuario) //o erro pode ser aqui pois eu nao estou acessando o segueEsseUsuario
       setQuantidadeSeguidores(usuario.seguidores)
-      console.log(usuario.segueEsseUsuario)//ele ta vindo como undefined
+      console.log(usuario.segueEsseUsuario) //ele ta vindo como undefined
     }
     verificarUsuarioSeguido()
-  }, [usuario, estaNoPerfilPessoal ])
+  }, [usuario, estaNoPerfilPessoal])
 
   const obterTextoBotaoPrincipal = () => {
     if (estaNoPerfilPessoal) {
-        return 'Editar perfil';
+      return 'Editar perfil'
     }
 
     if (estaSeguindoOUsuario) {
-        return 'Deixar de seguir';
+      return 'Deixar de seguir'
     }
 
-    return 'Seguir';
-}
+    return 'Seguir'
+  }
 
-const obterCorDoBotaoPrincipal = () => {
+  const obterCorDoBotaoPrincipal = () => {
     if (estaSeguindoOUsuario || estaNoPerfilPessoal) {
-      return 'invertido';
+      return 'invertido'
     }
-    
-    return 'primaria';
-}
 
-
+    return 'primaria'
+  }
   const manipularCliqueBotaoPrincipal = async () => {
     if (estaNoPerfilPessoal) {
       router.push('/perfil/editar')
@@ -54,9 +55,9 @@ const obterCorDoBotaoPrincipal = () => {
     try {
       await usuarioService.alternarSeguir(usuario?._id)
       setQuantidadeSeguidores(
-        estaSeguindoOUsuario 
-        ? quantidadeSeguidores - 1
-        : quantidadeSeguidores + 1
+        estaSeguindoOUsuario
+          ? quantidadeSeguidores - 1
+          : quantidadeSeguidores + 1
       )
       setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
     } catch (error) {
