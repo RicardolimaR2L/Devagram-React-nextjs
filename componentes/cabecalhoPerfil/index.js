@@ -8,11 +8,7 @@ import { useRouter } from 'next/router'
 
 const usuarioService = new UsuarioService()
 
-export default function CabecalhoPerfil({
-  usuario,
-  estaNoPerfilPessoal,
-  segueEsseUsuario
-}) {
+export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
   const router = useRouter()
   const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false)
   const [quantidadeSeguidores, setQuantidadeSeguidores] = useState(0)
@@ -34,7 +30,7 @@ export default function CabecalhoPerfil({
       return 'Editar perfil'
     }
 
-    if (estaSeguindoOUsuario) {
+    if (estaSeguindoOUsuario == true) {
       return 'Deixar de seguir'
     }
 
@@ -42,7 +38,7 @@ export default function CabecalhoPerfil({
   }
 
   const obterCorDoBotaoPrincipal = () => {
-    if (estaSeguindoOUsuario || estaNoPerfilPessoal) {
+    if (estaSeguindoOUsuario == true || estaNoPerfilPessoal) {
       return 'invertido'
     }
 
