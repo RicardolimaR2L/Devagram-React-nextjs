@@ -8,16 +8,14 @@ import { useEffect, useState } from 'react'
 
 const usuarioService = new UsuarioService()
 
-function Perfil(usuarioLogado) {
+function Perfil({ usuarioLogado }) {
   const [usuario, setUsuario] = useState([])
-  const router = useRouter();
+  const router = useRouter()
 
   const obterPerfil = async idUsuario => {
     try {
       const User = usuarioLogado.usuarioLogado
-      const { data } = await usuarioService.obterPerfil(
-        estaNoPerfilPessoal() ? User.id : idUsuario
-      )
+      const { data } = await usuarioService.obterPerfil(idUsuario)
       return data
     } catch (error) {
       console.log(error)
