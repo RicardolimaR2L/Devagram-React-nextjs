@@ -4,35 +4,39 @@ import FeedService from '@/services/FeedService'
 
 const feedService = new FeedService()
 
-export default function Feed({ usuarioLogado,  usuarioPerfil }) {
+export default function Feed({ usuarioLogado, usuarioPerfil, idUsuario }) {
   const [listaDePostagens, setListaDePostagens] = useState([])
 
   useEffect(() => {
     const capturarData = async () => {
-      setListaDePostagens([]);
-        const { data } = await feedService.carregarPostagens(usuarioPerfil?._id);
-
-      const postagensFormatadas = data.map(postagem => ({
-        id: postagem._id,
-        usuario: {
-          id: postagem?.idUsuario, 
-          nome: postagem?.usuario?.nome || usuarioPerfil?.nome,
-          avatar: postagem?.usuario?.avatar|| usuarioPerfil?.avatar
-        },
-        fotoDoPost: postagem?.foto,
-        descricao: postagem?.descricao,
-        likes: postagem?.likes,
-        comentarios: postagem?.comentarios?.map(c => ({
-          nome: c.nome,
-          mensagem: c.comentario
+      setListaDePostagens([])
+      const { data } = await feedService.carregarPostagens(idUsuario)
+      console.log(usuarioPerfil)
+      if (data.length > 0) {
+        const postagensFormatadas = data.map(postagem => ({
+          id: postagem._id,
+          usuario: {
+            id: postagem?.idUsuario,
+            nome: postagem?.usuario?.nome || usuarioPerfil?.nome,
+            avatar: postagem?.usuario?.avatar || usuarioPerfil?.avatar
+          },
+          fotoDoPost: postagem?.foto,
+          descricao: postagem?.descricao,
+          likes: postagem?.likes,
+          comentarios: postagem?.comentarios?.map(c => ({
+            nome: c.nome,
+            mensagem: c.comentario
+          }))
         }))
-      }))
-      setListaDePostagens(postagensFormatadas)
+        setListaDePostagens(postagensFormatadas)
+      } else {
+        setListaDePostagens([])
+      }
     }
     capturarData()
-  }, [usuarioLogado,  usuarioPerfil])
+  }, [usuarioLogado,idUsuario])
 
-  if(!listaDePostagens.length){
+  if (!listaDePostagens.length) {
     return null
   }
 
