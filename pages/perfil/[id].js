@@ -14,7 +14,6 @@ function Perfil({ usuarioLogado }) {
 
   const obterPerfil = async idUsuario => {
     try {
-      const User = usuarioLogado.usuarioLogado
       const { data } = await usuarioService.obterPerfil(idUsuario)
       return data
     } catch (error) {
@@ -52,7 +51,11 @@ function Perfil({ usuarioLogado }) {
             usuario={usuario}
             estaNoPerfilPessoal={estaNoPerfilPessoal()}
           />
-          <Feed usuarioLogado={usuarioLogado} idUsuario={usuario?._id} />
+          <Feed
+            usuarioLogado={usuarioLogado}
+            idUsuario={usuario?._id}
+            usuarioPerfil={usuario}
+          />
         </header>
       </div>
     </>
