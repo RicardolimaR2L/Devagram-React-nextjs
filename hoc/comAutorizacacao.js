@@ -1,13 +1,13 @@
-import Cabecalho from '@/componentes/layout/Cabecalho'
-import UsuarioService from '@/services/UsuarioService'
 import { useRouter } from 'next/router'
+import UsuarioService from '@/services/UsuarioService'
+import Cabecalho from '@/componentes/layout/Cabecalho'
 import Rodape from '@/componentes/layout/Rodape'
 
 const usuarioService = new UsuarioService()
 
 export default function comAutorizacacao(Componente) {
   return (props) => {
-    const router = useRouter
+    const router = useRouter();
 
     if (typeof window !== 'undefined') {
       //verifica se ja estamos em um browser
