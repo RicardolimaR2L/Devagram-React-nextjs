@@ -1,6 +1,6 @@
 import CabecalhoPerfil from '@/componentes/cabecalhoPerfil'
 import Feed from '@/componentes/feed'
-import comAutorizacacao from '@/hoc/comAutorizacacao'
+import comAutorizacao from '@/hoc/comAutorizacao'
 import UsuarioService from '@/services/UsuarioService'
 
 import { useRouter } from 'next/router'
@@ -62,4 +62,4 @@ function Perfil({ usuarioLogado }) {
   )
 }
 
-export default comAutorizacacao(Perfil)
+export default comAutorizacao(Perfil)
