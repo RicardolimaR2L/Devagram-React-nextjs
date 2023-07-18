@@ -18,9 +18,9 @@ export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
       if (!usuario) {
         return null
       }
-      setEstaSeguindoOUsuario(usuario.segueEsseUsuario) //o erro pode ser aqui pois eu nao estou acessando o segueEsseUsuario
+      setEstaSeguindoOUsuario(usuario.segueEsseUsuario) 
       setQuantidadeSeguidores(usuario.seguidores)
-      console.log(usuario.segueEsseUsuario) //ele ta vindo como undefined
+     
     }
     verificarUsuarioSeguido()
   }, [usuario, estaNoPerfilPessoal])
