@@ -11,13 +11,16 @@ export default function CabecalhoComAcoes({
   return (
     <div className={`cabecalhoComAcoes  ${className}`}>
       {iconeEsquerda ? (
+        <button className='setaEsquerdaDesktop'>
+
         <Image
           src={iconeEsquerda}
           alt="icone esquerda cabeçalho com ações"
           onClick={aoClicarAcaoEsquerda}
           width={25}
           height={25}
-        />
+          />
+          </button>
       ) : (
         textoEsquerda !== null && (
           <span
@@ -30,13 +33,11 @@ export default function CabecalhoComAcoes({
       )}
 
       <h3>{titulo?.nome}</h3>
-
       {elementoDireita && (
-        <button
-          type="button"
-          className="btnAcaoDireita"
-          onClick={aoClicarElementoDireita}
-        >
+        <button 
+        type="button"
+         className="btnAcaoDireita"
+         >
           {elementoDireita}
         </button>
       )}

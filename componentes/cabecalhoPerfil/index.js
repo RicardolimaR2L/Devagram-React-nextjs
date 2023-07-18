@@ -1,10 +1,13 @@
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+
 import imgSetaEsquerda from '@/public/imagens/setaEsquerda.svg'
+import imgLogout from '@/public/imagens/logout.svg'
 import CabecalhoComAcoes from '../cabecalhoComAcoes'
 import Avatar from '../avatar'
 import Botao from '../botao'
-import { useEffect, useState } from 'react'
 import UsuarioService from '@/services/UsuarioService'
-import { useRouter } from 'next/router'
 
 const usuarioService = new UsuarioService()
 
@@ -18,9 +21,8 @@ export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
       if (!usuario) {
         return null
       }
-      setEstaSeguindoOUsuario(usuario.segueEsseUsuario) 
+      setEstaSeguindoOUsuario(usuario.segueEsseUsuario)
       setQuantidadeSeguidores(usuario.seguidores)
-     
     }
     verificarUsuarioSeguido()
   }, [usuario, estaNoPerfilPessoal])
@@ -66,12 +68,34 @@ export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
     router.back()
   }
 
+  const logout = () => {
+    usuarioService.logout()
+    router.push('/')
+  }
+
+  const obterElementoDireitaCabecalho = () => {
+    if (estaNoPerfilPessoal) {
+      return (
+        <Image
+          src={imgLogout}
+          alt="icone logout"
+          onClick={logout}
+          width={23}
+          height={23}
+        />
+      )
+    }
+
+    return null
+  }
+
   return (
     <div className="cabecalhoPerfil largura30pctDesktop">
       <CabecalhoComAcoes
         iconeEsquerda={estaNoPerfilPessoal ? null : imgSetaEsquerda}
         aoClicarAcaoEsquerda={aoClicarNaSetaEsquerda}
         titulo={usuario}
+        elementoDireita={obterElementoDireitaCabecalho()}
       />
 
       <hr className="bordaDoCabecalhoPerfil" />
