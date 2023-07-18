@@ -11,12 +11,11 @@ export default function Feed({ usuarioLogado, usuarioPerfil, idUsuario }) {
     const capturarData = async () => {
       setListaDePostagens([])
       const { data } = await feedService.carregarPostagens(idUsuario)
-      console.log(usuarioPerfil)
       if (data.length > 0) {
         const postagensFormatadas = data.map(postagem => ({
           id: postagem._id,
           usuario: {
-            id: postagem?.idUsuario,
+            id: postagem?.idUsuario || usuarioPerfil?._id,
             nome: postagem?.usuario?.nome || usuarioPerfil?.nome,
             avatar: postagem?.usuario?.avatar || usuarioPerfil?.avatar
           },
@@ -34,7 +33,7 @@ export default function Feed({ usuarioLogado, usuarioPerfil, idUsuario }) {
       }
     }
     capturarData()
-  }, [usuarioLogado,idUsuario])
+  }, [usuarioLogado, idUsuario])
 
   if (!listaDePostagens.length) {
     return null
