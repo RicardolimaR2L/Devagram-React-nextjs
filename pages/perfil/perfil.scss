@@ -3,12 +3,6 @@
     background-color: $branco;
     margin-bottom: -15px;
 
-    .bordaDoCabecalhoPerfil {
-      margin: 0;
-      border: none;
-      background-color: $cinza1;
-      height: 1px;
-    }
     .cabecalhoComAcoes {
       button {
         background-color: transparent;
@@ -63,10 +57,6 @@
         .setaEsquerdaDesktop {
           display: none !important;
         }
-      }
-      .bordaDoCabecalhoPerfil {
-        margin: 0 auto;
-        width: 94%;
       }
     }
     .statusPerfil {
