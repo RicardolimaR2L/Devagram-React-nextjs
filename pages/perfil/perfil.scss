@@ -9,6 +9,12 @@
       background-color: $cinza1;
       height: 1px;
     }
+    .cabecalhoComAcoes {
+      button {
+        background-color: transparent;
+        border: none;
+      }
+    }
 
     .statusPerfil {
       display: flex;
@@ -54,8 +60,8 @@
   @media screen and (min-width: $desktopBreakpoint) {
     .cabecalhoPerfil {
       .cabecalhoComAcoes {
-        img {
-          cursor:pointer;
+        .setaEsquerdaDesktop {
+          display: none !important;
         }
       }
       .bordaDoCabecalhoPerfil {
