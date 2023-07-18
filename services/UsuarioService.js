@@ -12,8 +12,16 @@ export default class UsuarioService extends HttpService {
     localStorage.setItem('id', usuario.data._id)
 
     if (usuario.data.avatar) {
-      localStorage.setItem('avatar', data.avatar)
+      localStorage.setItem('avatar', usuario.data.avatar)
     }
+  }
+
+  async logout() {
+    localStorage.removeItem('nome')
+    localStorage.removeItem('email')
+    localStorage.removeItem('token')
+    localStorage.removeItem('id')
+    localStorage.removeItem('avatar')
   }
 
   async cadastro(dados) {
