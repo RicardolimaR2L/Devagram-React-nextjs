@@ -1,9 +1,11 @@
+
 .cabecalhoComAcoes {
   display: flex;
-  
+
   padding-left: 20px;
   padding-right: 20px;
   align-items: center;
+  margin-bottom: 10px;
 
   h3 {
     font-family: $fontBold;
@@ -11,14 +13,17 @@
     text-align: center;
     flex: 1;
   }
-    .btnAcaoDireita{
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
 
-    }
-    
-    
-    
-    
+  .cabecalhoComAcoesTextoEsquerda{
+    font-size: 12px;
+    color:$cinza3
+  }
+  .btnAcaoDireita {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color:$corPrimaria;
+    font-family: $fontBold;
+    font-size: 12px;
+  }
 }
