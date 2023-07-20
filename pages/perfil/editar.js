@@ -5,8 +5,9 @@ import { UploadImagem } from '@/componentes/uploadImagem'
 import comAutorizacao from '@/hoc/comAutorizacao'
 import imgAvatarPadrao from '@/public/imagens/avatar.svg'
 import imgLimpar from '@/public/imagens/limpar.svg'
+import Image from 'next/image'
 
-function EditarPerfil({ usuarioLogado }) {
+function EditarPerfil({ usuarioLogado, titulo }) {
   const [avatar, setAvatar] = useState()
   const [nome, setNome] = useState('')
   const [inputAvatar, setInputAvatar] = useState()
@@ -15,51 +16,54 @@ function EditarPerfil({ usuarioLogado }) {
   const aoCancelarEdicao = () => {
     router.push('/perfil/eu')
   }
-
   const abrirSeletorDeArquivos = () => {
     console.log('abrir seletor de arquivos')
   }
 
   return (
-    <div className="paginaEditarPerfil largura30pxtDesktop ">
+    <div className="paginaEditarPerfil largura30pctDesktop">
       <div className="conteudoPaginaEditarPerfil">
+        <h1>Editar perfil</h1>
         <CabecalhoComAcoes
-          titulo={'Editar perfil'}
           aoClicarAcaoEsquerda={aoCancelarEdicao}
-          textoEsquerda={'Cancelar'}
+          textoEsquerda="Cancelar"
           elementoDireita={'Concluir'}
           aoClicarElementoDireita={() =>
-            console.log('Clicou no elemento direita')
-          }
+            console.log('Clicou no elemento direita')}
         />
-      </div>
-      <hr className="linhaDivisoria" />
-
-      <div className="edicaoAvatar">
-        <UploadImagem
-          setImagem={setAvatar}
-          imagemPreview={avatar?.preview || imgAvatarPadrao.src}
-          aoSetarAReferencia={setInputAvatar}
-        />
-
-        <span onClick={abrirSeletorDeArquivos}> Alterar foto do Perfil </span>
         <hr className="linhaDivisoria" />
+
+        <div className="edicaoAvatar">
+          <UploadImagem
+            setImagem={setAvatar}
+            imagemPreview={avatar?.preview || imgAvatarPadrao.src}
+            imagemPreviewClassName="avatar"
+            aoSetarAReferencia={setInputAvatar}
+          />
+
+          <span onClick={abrirSeletorDeArquivos}>Alterar foto do perfil</span>
+        </div>
+
+        <hr className="linhaDivisoria" />
+
         <div className="edicaoNome">
           <label>Nome</label>
+
           <input
             type="text"
             value={nome}
-            onchange={e => setNome(e.target.value)}
+            onChange={e => setNome(e.target.value)}
           />
-          <new
-            Image
+          <Image
             src={imgLimpar}
-            alt="icone Limpar"
+            alt="icone limpar"
             width={16}
-            heigth={16}
+            height={16}
             onClick={() => setNome('')}
           />
         </div>
+
+        <hr className="linhaDivisoria" />
       </div>
     </div>
   )
