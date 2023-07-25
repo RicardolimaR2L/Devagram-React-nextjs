@@ -26,4 +26,12 @@
     font-family: $fontBold;
     font-size: 12px;
   }
-}
+  @media screen and (min-width:$desktopBreakpoint ) {
+    .cabecalhoComAcoesTextoEsquerda,.btnAcaoDireita{
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+    
+  }
+
