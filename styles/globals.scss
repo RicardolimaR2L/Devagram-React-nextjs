@@ -92,16 +92,16 @@ body {
     margin: auto;
   }
 }
+
 .linhaDivisoria {
   margin: 0;
   border: none;
   background-color: $cinza1;
   height: 1px;
-  
+
   @media screen and (min-width: $desktopBreakpoint) {
     margin: 0 auto;
     width: 94%;
-    
   }
 }
 
@@ -115,3 +115,4 @@ body {
 @import '/componentes/feed/feed.scss';
 @import '/componentes/cabecalhoComAcoes/cabecalhoComAcoes.scss';
 @import '../pages/perfil/perfil.scss';
+@import '../pages/publicacao/publicacao.scss';

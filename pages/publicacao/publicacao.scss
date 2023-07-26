@@ -1,0 +1,30 @@
+.paginaPublicacao {
+  background-color: $branco;
+
+  h1 {
+    font-family: $fontBold;
+    font-size: 16px;
+
+    width: 55%;
+    height: 55px;
+
+    margin-bottom: -55px;
+    margin-left: 35%;
+
+    color: $cinza4;
+  }
+  .conteudoPaginaPublicacao{
+    .primeiraEtapa{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      
+      .uploadImagemContainer{
+
+        text-align: center;
+      }
+      
+    }
+  }
+  
+}
