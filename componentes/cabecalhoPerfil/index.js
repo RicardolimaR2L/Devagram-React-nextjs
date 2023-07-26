@@ -11,28 +11,30 @@ import UsuarioService from '@/services/UsuarioService'
 
 const usuarioService = new UsuarioService()
 
-export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
+export default function CabecalhoPerfil({
+  usuario,
+  estaNoPerfilPessoal,
+  usuarioLogado
+}) {
   const router = useRouter()
   const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false)
   const [quantidadeSeguidores, setQuantidadeSeguidores] = useState(0)
 
   useEffect(() => {
-    const verificarUsuarioSeguido = () => {
-      if (!usuario) {
-        return null
-      }
-      setEstaSeguindoOUsuario(usuario.segueEsseUsuario)
-      setQuantidadeSeguidores(usuario.seguidores)
+    if (!usuario) {
+      return
     }
-    verificarUsuarioSeguido()
-  }, [usuario, estaNoPerfilPessoal])
+
+    setEstaSeguindoOUsuario(usuario.segueEsseUsuario)
+    setQuantidadeSeguidores(usuario.seguidores)
+  }, [usuario])
 
   const obterTextoBotaoPrincipal = () => {
     if (estaNoPerfilPessoal) {
       return 'Editar perfil'
     }
 
-    if (estaSeguindoOUsuario == true) {
+    if (estaSeguindoOUsuario) {
       return 'Deixar de seguir'
     }
 
@@ -40,18 +42,20 @@ export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
   }
 
   const obterCorDoBotaoPrincipal = () => {
-    if (estaSeguindoOUsuario == true || estaNoPerfilPessoal) {
+    if (estaSeguindoOUsuario || estaNoPerfilPessoal) {
       return 'invertido'
     }
 
     return 'primaria'
   }
+
   const manipularCliqueBotaoPrincipal = async () => {
     if (estaNoPerfilPessoal) {
-      router.push('/perfil/editar')
+      return router.push('/perfil/editar')
     }
+
     try {
-      await usuarioService.alternarSeguir(usuario?._id)
+      await usuarioService.alternarSeguir(usuario._id)
       setQuantidadeSeguidores(
         estaSeguindoOUsuario
           ? quantidadeSeguidores - 1
@@ -59,8 +63,7 @@ export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
       )
       setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
     } catch (error) {
-      console.log(error)
-      alert('Erro ao Seguir/Deixar de seguir')
+      alert(`Erro ao seguir/deixar de seguir!`)
     }
   }
 
@@ -94,14 +97,14 @@ export default function CabecalhoPerfil({ usuario, estaNoPerfilPessoal }) {
       <CabecalhoComAcoes
         iconeEsquerda={estaNoPerfilPessoal ? null : imgSetaEsquerda}
         aoClicarAcaoEsquerda={aoClicarNaSetaEsquerda}
-        titulo={usuario}
+        titulo={usuarioLogado}
         elementoDireita={obterElementoDireitaCabecalho()}
       />
 
       <hr className="linhaDivisoria" />
 
       <div className="statusPerfil">
-        <Avatar src={usuario?.avatar} />
+        <Avatar src={usuarioLogado?.avatar} />
         <div className="informacoesPerfil">
           <div className="statusContainer">
             <div className="status">

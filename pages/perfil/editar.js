@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import CabecalhoComAcoes from '@/componentes/cabecalhoComAcoes'
 import { UploadImagem } from '@/componentes/uploadImagem'
@@ -6,18 +6,56 @@ import comAutorizacao from '@/hoc/comAutorizacao'
 import imgAvatarPadrao from '@/public/imagens/avatar.svg'
 import imgLimpar from '@/public/imagens/limpar.svg'
 import Image from 'next/image'
+import UsuarioService from '@/services/UsuarioService'
+import { validarNome } from '@/útil/validadores'
 
-function EditarPerfil({ usuarioLogado, titulo }) {
+const usuarioService = new UsuarioService()
+
+function EditarPerfil({ usuarioLogado }) {
   const [avatar, setAvatar] = useState()
   const [nome, setNome] = useState('')
   const [inputAvatar, setInputAvatar] = useState()
-  const router = useRouter()
+  const router = useRouter();
+
+  useEffect(() => {
+    setNome(usuarioLogado?.nome)
+    setAvatar({
+      preview: usuarioLogado?.avatar
+    })
+  }, [])
+
+  const atualizarPerfil = async () => {
+    //atualiza o perfil do usuario logado
+    try {
+      if (!validarNome(nome)) {
+        alert('O nome precisa de pelo menos 2 caracteres')
+        return
+      }
+
+      const corpoRequisicao = new FormData()
+      corpoRequisicao.append('nome', nome)
+
+      if (avatar.arquivo) {
+        corpoRequisicao.append('file', avatar.arquivo)
+      }
+
+      await usuarioService.atualizarPerfil(corpoRequisicao)
+      localStorage.setItem('nome', nome)
+
+      if (avatar.arquivo) {
+        localStorage.setItem('avatar', avatar.preview)
+      }
+      router.push('/perfil/eu')
+    } catch (error) {
+      alert(' Erro ao editar perfil ')
+    }
+  }
 
   const aoCancelarEdicao = () => {
     router.push('/perfil/eu')
   }
   const abrirSeletorDeArquivos = () => {
-    console.log('abrir seletor de arquivos')
+    inputAvatar?.click()
   }
 
   return (
@@ -28,8 +66,7 @@ function EditarPerfil({ usuarioLogado, titulo }) {
           aoClicarAcaoEsquerda={aoCancelarEdicao}
           textoEsquerda="Cancelar"
           elementoDireita={'Concluir'}
-          aoClicarElementoDireita={() =>
-            console.log('Clicou no elemento direita')}
+          aoClicarElementoDireita={atualizarPerfil}
         />
         <hr className="linhaDivisoria" />
 
