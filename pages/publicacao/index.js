@@ -1,9 +1,9 @@
-import CabecalhoComAcoes from '@/componentes/cabecalhoComAcoes'//
-import { UploadImagem } from '@/componentes/uploadImagem'//
-import comAutorizacao from '@/hoc/comAutorizacao'//
-import { useState } from 'react'//
-import imgPublicacao from '@/public/imagens/imgPublicacao.svg'//
-import Botao from '@/componentes/botao'//
+import CabecalhoComAcoes from '@/componentes/cabecalhoComAcoes'
+import { UploadImagem } from '@/componentes/uploadImagem'
+import comAutorizacao from '@/hoc/comAutorizacao'
+import { useState } from 'react'
+import imgPublicacao from '@/public/imagens/imgPublicacao.svg'
+import Botao from '@/componentes/botao'
 
 function publicacao() {
   const [imagem, setImagem] = useState()
@@ -11,17 +11,18 @@ function publicacao() {
 
   return (
     <div className="paginaPublicacao largura30pctDesktop">
-          <h1>Nova publicação</h1>
-          <CabecalhoComAcoes
-            textoEsquerda={'Cancelar'}
-            elementoDireita={'Avançar'}
-          />
-      <div className="conteudoPaginaPublicaçao">
+      <h1>Nova publicação</h1>
+      <CabecalhoComAcoes
+        textoEsquerda={''}
+        elementoDireita={''}
+      />
+      <hr className="linhaDivisoria" />
+      <div className="conteudoPaginaPublicacao">
         <div className="primeiraEtapa">
           <UploadImagem
             setImagem={setImagem}
             aoSetarAReferencia={setInputImagem}
-            imagemPreviewClassName={imagem ? 'previewImagemPublicacao' : ''}
+            imagemPreviewClassName={'previewImagemPublicacao'}
             imagemPreview={imagem?.preview || imgPublicacao.src}
           />
           <span className="desktop textoDragAndDrop">

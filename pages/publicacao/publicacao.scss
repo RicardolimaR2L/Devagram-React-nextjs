@@ -9,22 +9,42 @@
     height: 55px;
 
     margin-bottom: -55px;
-    margin-left: 35%;
+    margin-left: 37%;
 
     color: $cinza4;
   }
-  .conteudoPaginaPublicacao{
-    .primeiraEtapa{
+  .conteudoPaginaPublicacao {
+    .primeiraEtapa {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      
-      .uploadImagemContainer{
 
-        text-align: center;
+      .uploadImagemContainer {
+        .imagemPreviewContainer {
+          margin: 30px auto;
+          width: 150px;
+          height: 150px;
+          .previewImagemPublicacao {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
       }
-      
+
+      .btn {
+        background-color: $corPrimaria3;
+        color: $branco;
+        width: 70%;
+        margin: auto;
+        padding: 12px;
+      }
     }
   }
-  
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    display: flex;
+    height: 85vh;
+    flex-direction: column;
+  }
 }
