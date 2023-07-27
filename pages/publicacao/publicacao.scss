@@ -38,6 +38,11 @@
         width: 70%;
         margin: auto;
         padding: 12px;
+
+        &:hover {
+          border: none;
+          opacity: 0.8;
+        }
       }
     }
   }
@@ -46,5 +51,20 @@
     display: flex;
     height: 85vh;
     flex-direction: column;
+
+    .conteudoPaginaPublicacao {
+      .primeiraEtapa {
+        .uploadImagemContainer {
+          .imagemPreviewContainer {
+            margin-bottom: 20px;
+          }
+        }
+        .textoDragAndDrop {
+          text-align: center;
+          color: $cinza4;
+          margin-bottom: 30px;
+        }
+      }
+    }
   }
 }
