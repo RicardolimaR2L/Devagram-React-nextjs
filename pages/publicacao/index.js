@@ -12,17 +12,14 @@ function publicacao() {
   return (
     <div className="paginaPublicacao largura30pctDesktop">
       <h1>Nova publicação</h1>
-      <CabecalhoComAcoes
-        textoEsquerda={''}
-        elementoDireita={''}
-      />
+      <CabecalhoComAcoes textoEsquerda={''} elementoDireita={''} />
       <hr className="linhaDivisoria" />
       <div className="conteudoPaginaPublicacao">
         <div className="primeiraEtapa">
           <UploadImagem
             setImagem={setImagem}
             aoSetarAReferencia={setInputImagem}
-            imagemPreviewClassName={'previewImagemPublicacao'}
+            imagemPreviewClassName={!imagem ?'previewImagemPublicacao': 'previewImagemSelecionada'}
             imagemPreview={imagem?.preview || imgPublicacao.src}
           />
           <span className="desktop textoDragAndDrop">
@@ -31,7 +28,7 @@ function publicacao() {
 
           <Botao
             texto={'Selecionar uma imagem'}
-            manipularClique={() => console.log('teste ok ')}
+            manipularClique={() => inputImagem?.click()}
           />
         </div>
       </div>
