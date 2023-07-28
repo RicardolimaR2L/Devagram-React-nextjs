@@ -97,14 +97,14 @@ export default function CabecalhoPerfil({
       <CabecalhoComAcoes
         iconeEsquerda={estaNoPerfilPessoal ? null : imgSetaEsquerda}
         aoClicarAcaoEsquerda={aoClicarNaSetaEsquerda}
-        titulo={usuarioLogado}
+        titulo={estaNoPerfilPessoal ? usuarioLogado : usuario }
         elementoDireita={obterElementoDireitaCabecalho()}
       />
 
       <hr className="linhaDivisoria" />
 
       <div className="statusPerfil">
-        <Avatar src={usuarioLogado?.avatar} />
+        <Avatar src={estaNoPerfilPessoal ? usuarioLogado?.avatar: usuario.avatar} />
         <div className="informacoesPerfil">
           <div className="statusContainer">
             <div className="status">
