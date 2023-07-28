@@ -9,7 +9,7 @@
     height: 55px;
 
     margin-bottom: -55px;
-    margin-left: 37%;
+    margin-left: 30%;
 
     color: $cinza4;
   }
@@ -20,14 +20,19 @@
       justify-content: center;
 
       .uploadImagemContainer {
+        text-align: center;
         .imagemPreviewContainer {
           margin: 30px auto;
-          width: 150px;
-          height: 150px;
-          .previewImagemPublicacao {
-            width: 100%;
-            height: 100%;
+          img {
             object-fit: cover;
+          }
+          .previewImagemPublicacao {
+            width: 150px;
+            height: 150px;
+          }
+          .previewImagemSelecionada {
+            width: 250px;
+            height: 250px;
           }
         }
       }
@@ -45,6 +50,38 @@
         }
       }
     }
+
+    .segundaEtapa{
+      display: flex;
+      padding:16px;
+      // button{
+      //   border: none;
+      //   background-color: transparent;
+      // }
+      .uploadImagemContainer{
+      .imagemPreviewContainer{
+        width: 80px;
+        height: 80px;
+
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      }
+      textarea{
+        resize: none;
+        border: none;
+        outline: none;
+        font-size: 12px;
+        font-family: $fontLight;
+        flex: 1;
+        color: $cinza2;
+        margin-left: 16px;
+      }
+    }
+
   }
 
   @media screen and (min-width: $desktopBreakpoint) {
