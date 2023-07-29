@@ -1,6 +1,12 @@
 .paginaPublicacao {
   background-color: $branco;
 
+  .cabecalhoComAcoes {
+    .setaEsquerdaDesktop {
+      cursor: pointer;
+    }
+  }
+
   h1 {
     font-family: $fontBold;
     font-size: 16px;
@@ -9,10 +15,11 @@
     height: 55px;
 
     margin-bottom: -55px;
-    margin-left: 30%;
+    margin-left: 35%;
 
     color: $cinza4;
   }
+
   .conteudoPaginaPublicacao {
     .primeiraEtapa {
       display: flex;
@@ -51,26 +58,23 @@
       }
     }
 
-    .segundaEtapa{
+    .segundaEtapa {
       display: flex;
-      padding:16px;
-      // button{
-      //   border: none;
-      //   background-color: transparent;
-      // }
-      .uploadImagemContainer{
-      .imagemPreviewContainer{
-        width: 80px;
-        height: 80px;
+      padding: 16px;
 
-        img{
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+      .uploadImagemContainer {
+        .imagemPreviewContainer {
+          width: 80px;
+          height: 80px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         }
       }
-      }
-      textarea{
+      textarea {
         resize: none;
         border: none;
         outline: none;
@@ -81,7 +85,6 @@
         margin-left: 16px;
       }
     }
-
   }
 
   @media screen and (min-width: $desktopBreakpoint) {
@@ -100,6 +103,15 @@
           text-align: center;
           color: $cinza4;
           margin-bottom: 30px;
+        }
+      }
+
+      .segundaEtapa {
+        .uploadImagemContainer {
+          .imagemPreviewContainer {
+            width: 160px;
+            height: 160px;
+          }
         }
       }
     }
