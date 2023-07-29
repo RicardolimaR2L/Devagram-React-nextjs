@@ -12,7 +12,7 @@ export default function CabecalhoComAcoes({
   return (
     <div className={`cabecalhoComAcoes  ${className}`}>
       {iconeEsquerda ? (
-        <button className="setaEsquerdaDesktop">
+        <span className="setaEsquerdaDesktop">
           <Image
             src={iconeEsquerda}
             alt="icone esquerda cabeçalho com ações"
@@ -20,7 +20,7 @@ export default function CabecalhoComAcoes({
             width={25}
             height={25}
           />
-        </button>
+        </span>
       ) : (
         textoEsquerda !== null && (
           <span
