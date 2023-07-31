@@ -6,6 +6,9 @@ import imgPublicacao from '@/public/imagens/imgPublicacao.svg'
 import imagemSetaEsquerda from '@/public/imagens/setaEsquerda.svg'
 import Botao from '@/componentes/botao'
 
+const limiteDaDescricao = 255
+const descricaoMinima = 3
+
 function publicacao() {
   const [imagem, setImagem] = useState()
   const [descricao, setDescricao] = useState('')
@@ -42,13 +45,57 @@ function publicacao() {
   }
 
   const aoClicarAcaoDireitaCabecalho = () => {
-    setEtapaAtual(2)
+    if (estaNaEtapaUm()) {
+      setEtapaAtual(2)
+      return
+    }
+    publicar()
+  }
+  const escreverDescricao = e => {
+    const valorAtual = e.target.value
+    if (valorAtual.length >= limiteDaDescricao) {
+      return
+    }
+
+    setDescricao(valorAtual)
+  }
+
+  const obterClassNameCabecalho = () => {
+    if (estaNaEtapaUm()) {
+      return 'primeiraEtapa'
+    }
+
+    return 'segundaEtapa'
+  }
+
+  const publicar = async () => {
+    try {
+      if(!validarFormulario()){
+        alert('A descrição precisa de pelo menos 3 caracteres e a imagem precisa estar selecionada');
+        return;
+      }
+
+
+
+
+    } catch (error) {
+      console.log(error)
+      alert('Erro ao salvar publicação!')
+    }
+  }
+
+  const validarFormulario = () => {
+    if (descricao.length < descricaoMinima) {
+      return false
+    }
+    return descricao.length < descricaoMinima && imagem?.arquivo
   }
 
   return (
     <div className="paginaPublicacao largura30pctDesktop">
       <h1>Nova publicação</h1>
       <CabecalhoComAcoes
+       className={obterClassNameCabecalho()}
         iconeEsquerda={estaNaEtapaUm() ? null : imagemSetaEsquerda}
         textoEsquerda={obterTextoEsquerdaCabecalho()}
         aoClicarAcaoEsquerda={aoClicarAcaoEsquerdaCabecalho}
@@ -78,22 +125,21 @@ function publicacao() {
           </div>
         ) : (
           <>
-         
-          <div className="segundaEtapa">
-            <UploadImagem
-              setImagem={setImagem}
-              imagemPreview={imagem?.preview}
-            />
+            <div className="segundaEtapa">
+              <UploadImagem
+                setImagem={setImagem}
+                imagemPreview={imagem?.preview}
+              />
 
-            <textarea
-              rows={3}
-              value={descricao}
-              placeholder="Escreva uma legenda"
-              onChange={e => setDescricao(e.target.value)}
-            ></textarea>
-          </div>
+              <textarea
+                rows={3}
+                value={descricao}
+                placeholder="Escreva uma legenda"
+                onChange={e => setDescricao(e.target.value)}
+              ></textarea>
+            </div>
             <hr className="linhaDivisoria" />
-        </>
+          </>
         )}
       </div>
     </div>
