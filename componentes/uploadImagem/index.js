@@ -26,9 +26,14 @@ export function UploadImagem({
       return
     }
 
-    const arquivo = referenciaInput?.current?.files[0] //Captura a primeira imagem do array
-    const fileReader = new FileReader() //lê e mostra o preview da imagem que pode ser postada
-    fileReader.readAsDataURL(arquivo) //lê o arquivo e devolve a URl desse arquivo pra ser usado em um componente de uploadImagem
+    const arquivo = referenciaInput?.current?.files[0] //Captura a primeira imagem do array  
+    obterUrlDaImagemEAtualizarEstado(arquivo)  
+
+  }
+
+  const obterUrlDaImagemEAtualizarEstado = (arquivo) => {
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(arquivo)
     fileReader.onloadend = () => {
       setImagem({
         preview: fileReader.result,
@@ -37,10 +42,21 @@ export function UploadImagem({
     }
   }
 
+  const aoSoltarAimagem = e => {
+    e.preventDefault()
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const arquivo = e.dataTransfer.files[0]
+      obterUrlDaImagemEAtualizarEstado(arquivo)  
+
+    }
+  }
+
   return (
     <div
       className={`uploadImagemContainer ${className}`}
       onClick={abrirSeletorArquivos}
+      onDragOver={e => e.preventDefault()}
+      onDrop={aoSoltarAimagem}
     >
       {imagemPreview && (
         <div className="imagemPreviewContainer">
