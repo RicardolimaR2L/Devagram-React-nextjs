@@ -19,7 +19,7 @@ export default function Postagem({
   descricao,
   comentarios,
   usuarioLogado,
-  likes,
+  likes
 }) {
   const [curtidasPostagem, setCurtidasPostagem] = useState(likes)
   const [comentariosPostagem, setComentarioPostagem] = useState(comentarios)
@@ -31,7 +31,6 @@ export default function Postagem({
   const exibirDescricaoCompleta = () => {
     setTamanhoAtualDaDescricao(Number.MAX_SAFE_INTEGER)
   }
-    
 
   const descricaoMaiorQueLimite = () => {
     return descricao.length > tamanhoAtualDaDescricao
@@ -93,15 +92,15 @@ export default function Postagem({
 
   const obterImagemCurtida = () => {
     return usuarioLogadoCurtiuPostagem() ? imgCurtido : imgCurtir
-  } 
+  }
   return (
     <div className="postagem">
-            <Link href={`/perfil/${usuario.id}`}>
-                <section className="cabecalhoPostagem">
-                    <Avatar src={usuario?.avatar} />
-                    <strong>{usuario?.nome}</strong>
-                </section>
-            </Link>
+      <Link href={`/perfil/${usuario.id}`}>
+        <section className="cabecalhoPostagem">
+          <Avatar src={usuario?.avatar} />
+          <strong>{usuario?.nome}</strong>
+        </section>
+      </Link>
 
       <div className="fotoDaPostagem">
         <img src={fotoDoPost} alt="Descrição da imagem" />
@@ -147,12 +146,13 @@ export default function Postagem({
         </div>
 
         <div className="comentariosDaPublicacao">
-          {Array.isArray(comentariosPostagem) && comentariosPostagem?.map((comentario, i) => (
-            <div className="comentario" key={i}>
-              <strong className="nomeUsuario">{comentario.nome}</strong>
-              <p className="descricao">{comentario.mensagem}</p>
-            </div>
-          ))}
+          {Array.isArray(comentariosPostagem) &&
+            comentariosPostagem?.map((comentario, i) => (
+              <div className="comentario" key={i}>
+                <strong className="nomeUsuario">{comentario.nome}</strong>
+                <p className="descricao">{comentario.mensagem}</p>
+              </div>
+            ))}
         </div>
       </div>
       {deveExibirSecaoParaComentar && (

@@ -1,24 +1,25 @@
-import CabecalhoComAcoes from '@/componentes/cabecalhoComAcoes'
-import { UploadImagem } from '@/componentes/uploadImagem'
-import comAutorizacao from '@/hoc/comAutorizacao'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { UploadImagem}  from '@/componentes/uploadImagem'
+import CabecalhoComAcoes from '@/componentes/cabecalhoComAcoes'
+import comAutorizacao from '@/hoc/comAutorizacao'
 import imgPublicacao from '@/public/imagens/imgPublicacao.svg'
 import imagemSetaEsquerda from '@/public/imagens/setaEsquerda.svg'
 import Botao from '@/componentes/botao'
 import FeedService from '@/services/FeedService'
-import { useRouter } from 'next/router'
 
 const limiteDaDescricao = 255
 const descricaoMinima = 3
 const feedService = new FeedService()
 
-function publicacao() {
+ export function publicacao() {
   const [imagem, setImagem] = useState()
   const [descricao, setDescricao] = useState('')
   const [inputImagem, setInputImagem] = useState()
   const [etapaAtual, setEtapaAtual] = useState(1)
   const router = useRouter()
-  const estaNaEtapaUm = () => etapaAtual === 1 //aqui usamos a sintaxe reduzida sem as {} pois queremos que retorne o resultado direto que é a etapa1.
+  const estaNaEtapaUm = () => etapaAtual === 1 
+  //aqui usamos a sintaxe reduzida sem as {} pois queremos que retorne o resultado direto, que é a etapa1.
 
   const obterTextoEsquerdaCabecalho = () => {
     if (estaNaEtapaUm() && imagem) {
