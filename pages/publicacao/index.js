@@ -5,16 +5,19 @@ import { useState } from 'react'
 import imgPublicacao from '@/public/imagens/imgPublicacao.svg'
 import imagemSetaEsquerda from '@/public/imagens/setaEsquerda.svg'
 import Botao from '@/componentes/botao'
+import FeedService from '@/services/FeedService'
+import { useRouter } from 'next/router'
 
 const limiteDaDescricao = 255
 const descricaoMinima = 3
+const feedService = new FeedService()
 
 function publicacao() {
   const [imagem, setImagem] = useState()
   const [descricao, setDescricao] = useState('')
   const [inputImagem, setInputImagem] = useState()
   const [etapaAtual, setEtapaAtual] = useState(1)
-
+  const router = useRouter()
   const estaNaEtapaUm = () => etapaAtual === 1 //aqui usamos a sintaxe reduzida sem as {} pois queremos que retorne o resultado direto que é a etapa1.
 
   const obterTextoEsquerdaCabecalho = () => {
@@ -70,14 +73,19 @@ function publicacao() {
 
   const publicar = async () => {
     try {
-      if(!validarFormulario()){
-        alert('A descrição precisa de pelo menos 3 caracteres e a imagem precisa estar selecionada');
-        return;
+      if (!validarFormulario()) {
+        alert(
+          'A descrição precisa de pelo menos 3 caracteres e a imagem precisa estar selecionada'
+        )
+        return
       }
 
+      const corpoPublicacao = new FormData()
+      corpoPublicacao.append('descricao', descricao)
+      corpoPublicacao.append('file', imagem.arquivo)
 
-
-
+      await feedService.FazerPublicacao(corpoPublicacao)
+      router.push('/')
     } catch (error) {
       console.log(error)
       alert('Erro ao salvar publicação!')
@@ -85,17 +93,14 @@ function publicacao() {
   }
 
   const validarFormulario = () => {
-    if (descricao.length < descricaoMinima) {
-      return false
-    }
-    return descricao.length < descricaoMinima && imagem?.arquivo
+    return descricao.length >= descricaoMinima && imagem?.arquivo
   }
 
   return (
     <div className="paginaPublicacao largura30pctDesktop">
       <h1>Nova publicação</h1>
       <CabecalhoComAcoes
-       className={obterClassNameCabecalho()}
+        className={obterClassNameCabecalho()}
         iconeEsquerda={estaNaEtapaUm() ? null : imagemSetaEsquerda}
         textoEsquerda={obterTextoEsquerdaCabecalho()}
         aoClicarAcaoEsquerda={aoClicarAcaoEsquerdaCabecalho}
@@ -135,7 +140,7 @@ function publicacao() {
                 rows={3}
                 value={descricao}
                 placeholder="Escreva uma legenda"
-                onChange={e => setDescricao(e.target.value)}
+                onChange={escreverDescricao}
               ></textarea>
             </div>
             <hr className="linhaDivisoria" />

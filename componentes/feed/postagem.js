@@ -19,7 +19,7 @@ export default function Postagem({
   descricao,
   comentarios,
   usuarioLogado,
-  likes
+  likes,
 }) {
   const [curtidasPostagem, setCurtidasPostagem] = useState(likes)
   const [comentariosPostagem, setComentarioPostagem] = useState(comentarios)
@@ -93,8 +93,7 @@ export default function Postagem({
 
   const obterImagemCurtida = () => {
     return usuarioLogadoCurtiuPostagem() ? imgCurtido : imgCurtir
-  }
-
+  } 
   return (
     <div className="postagem">
             <Link href={`/perfil/${usuario.id}`}>
