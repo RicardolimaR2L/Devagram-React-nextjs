@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { UploadImagem}  from '@/componentes/uploadImagem'
+import { UploadImagem } from '@/componentes/uploadImagem'
 import CabecalhoComAcoes from '@/componentes/cabecalhoComAcoes'
 import comAutorizacao from '@/hoc/comAutorizacao'
 import imgPublicacao from '@/public/imagens/imgPublicacao.svg'
@@ -12,13 +12,13 @@ const limiteDaDescricao = 255
 const descricaoMinima = 3
 const feedService = new FeedService()
 
- export function publicacao() {
+export function Publicacao() {
   const [imagem, setImagem] = useState()
   const [descricao, setDescricao] = useState('')
   const [inputImagem, setInputImagem] = useState()
   const [etapaAtual, setEtapaAtual] = useState(1)
   const router = useRouter()
-  const estaNaEtapaUm = () => etapaAtual === 1 
+  const estaNaEtapaUm = () => etapaAtual === 1
   //aqui usamos a sintaxe reduzida sem as {} pois queremos que retorne o resultado direto, que é a etapa1.
 
   const obterTextoEsquerdaCabecalho = () => {
@@ -152,4 +152,4 @@ const feedService = new FeedService()
   )
 }
 
-export default comAutorizacao(publicacao)
+export default comAutorizacao(Publicacao)
