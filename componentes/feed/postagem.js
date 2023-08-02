@@ -62,7 +62,9 @@ export default function Postagem({
       ])
     } catch (error) {
       console.log(error)
-      console.log('Erro ao fazer comentário' + e?.response?.data?.erro || '')
+      console.log(
+        'Erro ao fazer comentário' + error?.response?.data?.erro || ''
+      )
     }
   }
 
@@ -86,7 +88,9 @@ export default function Postagem({
       }
     } catch (error) {
       console.log(error)
-      console.log('Erro ao alterar a curtida' + e?.response?.data?.erro || '')
+      console.log(
+        'Erro ao alterar a curtida' + error?.response?.data?.erro || ''
+      )
     }
   }
 
