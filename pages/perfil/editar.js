@@ -22,9 +22,9 @@ function EditarPerfil({ usuarioLogado }) {
         return;
     }
 
-    setNome(usuarioLogado.nome);
+    setNome(usuarioLogado?.nome);
     setAvatar({
-        preview: usuarioLogado.avatar
+        preview: usuarioLogado?.avatar
     });
 }, [usuarioLogado]);
 
@@ -77,7 +77,7 @@ function EditarPerfil({ usuarioLogado }) {
         <div className="edicaoAvatar">
           <UploadImagem
             setImagem={setAvatar}
-            imagemPreview={avatar?.preview || imgAvatarPadrao.src}
+            imagemPreview={avatar?.preview || imgAvatarPadrao?.src}
             imagemPreviewClassName="avatar"
             aoSetarAReferencia={setInputAvatar}
           />
