@@ -23,13 +23,13 @@ import {
 const usuarioService = new UsuarioService()
 
 export default function Cadastro() {
-  const [imagem, setImagem] = useState(null)
-  const [nome, setNome] = useState('')
-  const [email, setEmail] = useState('')
-  const [senha, setSenha] = useState('')
-  const [confirtmacaosenha, setConfirmacaosenha] = useState('')
-  const [estaSubmetendo, setEstaSubmetendo] = useState(false)
-  const router = useRouter()
+  const [imagem, setImagem] = useState(null);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirtmacaosenha, setConfirmacaosenha] = useState("");
+  const [estaSubmetendo, setEstaSubmetendo] = useState(false);
+  const router = useRouter();
 
   const validarFormulario = () => {
     return (
