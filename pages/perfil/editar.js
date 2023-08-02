@@ -17,7 +17,7 @@ function EditarPerfil({ usuarioLogado }) {
   const [inputAvatar, setInputAvatar] = useState()
   const router = useRouter();
 
-  useEffect(() => {
+  useEffect((usuarioLogado) => {
     if (!usuarioLogado) {
         return;
     }
