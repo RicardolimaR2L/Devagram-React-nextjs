@@ -12,17 +12,21 @@ import { validarNome } from '@/útil/validadores'
 const usuarioService = new UsuarioService()
 
 function EditarPerfil({ usuarioLogado }) {
-  const [avatar, setAvatar] = useState()
-  const [nome, setNome] = useState('')
+  const [avatar, setAvatar] = useState();
+  const [nome, setNome] = useState('');
   const [inputAvatar, setInputAvatar] = useState()
   const router = useRouter();
 
   useEffect(() => {
-    setNome(usuarioLogado?.nome)
+    if (!usuarioLogado) {
+        return;
+    }
+
+    setNome(usuarioLogado.nome);
     setAvatar({
-      preview: usuarioLogado?.avatar
-    })
-  }, [usuarioLogado?.nome, usuarioLogado?.avatar])
+        preview: usuarioLogado.avatar
+    });
+}, []);
 
   const atualizarPerfil = async () => {
     //atualiza o perfil do usuario logado
