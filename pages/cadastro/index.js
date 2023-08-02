@@ -22,7 +22,7 @@ import {
 
 const usuarioService = new UsuarioService()
 
-export default function cadastro() {
+export default function Cadastro() {
   const [imagem, setImagem] = useState(null)
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
