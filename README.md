@@ -1,4 +1,4 @@
-# Devagram 
+# Devagram
 
 Projeto desenvolvimento para apresentação do react.js e next na formação devaria 2023.
 
@@ -7,7 +7,7 @@ Projeto desenvolvimento para apresentação do react.js e next na formação dev
 - React.js 18.2.0
 - Nextjs 13.4.4
 - Nodejs 18.16.1
-- Sass  1.62.1
+- Sass 1.62.1
 
 ### Configuração do ambiente de desenvolvimento
 

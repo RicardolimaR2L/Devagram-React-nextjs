@@ -1,6 +1,6 @@
-import HttpService from './HttpService'
+import DevagramApiService from './DevagramApiService'
 
-export default class UsuarioService extends HttpService {
+export default class UsuarioService extends DevagramApiService {
   async login(credenciais) {
     const { data } = await this.post('/login', credenciais)
 
@@ -28,10 +28,9 @@ export default class UsuarioService extends HttpService {
     return this.post('/cadastro', dados)
   }
 
-async atualizarPerfil(dados){
-return this.put('/usuario', dados)
-}
-
+  async atualizarPerfil(dados) {
+    return this.put('/usuario', dados)
+  }
 
   estaAutenticado() {
     return localStorage.getItem('token') !== null

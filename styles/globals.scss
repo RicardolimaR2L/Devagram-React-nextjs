@@ -16,7 +16,7 @@ body,
 }
 
 .oculto {
-  display: none;
+  display: none !important; 
 }
 
 input {
@@ -114,5 +114,6 @@ body {
 @import '../componentes/layout/rodape.scss';
 @import '/componentes/feed/feed.scss';
 @import '/componentes/cabecalhoComAcoes/cabecalhoComAcoes.scss';
+@import '/componentes/loading/loading.scss';
 @import '../pages/perfil/perfil.scss';
 @import '../pages/publicacao/publicacao.scss';
